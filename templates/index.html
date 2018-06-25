@@ -1,6 +1,4 @@
-{% extends 'layout.html' %}
-
-{% block body %}
+{% extends 'layout.html' %} {% block body %}
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm img-hover">
@@ -23,8 +21,8 @@
             <img src="{{url_for('static',filename='Eggs1.JPG')}}" class="img-fluid rounded" alt="Responsive image">
             <br></br>
         </div>
-    </div>  
-    <div class="row"> 
+    </div>
+    <div class="row">
         <div class="col-sm">
             <img src="{{url_for('static',filename='BlackWhitePortrait1.JPG')}}" class="img-fluid rounded" alt="Responsive image">
             <br></br>
@@ -32,6 +30,6 @@
         <div class="col-sm" id="last">
             <img src="{{url_for('static',filename='Charlotte1.JPG')}}" class="img-fluid rounded" alt="Responsive image">
         </div>
-    </div>          
+    </div>
 </div>
 {% endblock %}
