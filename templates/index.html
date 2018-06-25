@@ -1,6 +1,37 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-<h1 class="title">Shanna Rebekah Photography</h1>
-
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm img-hover">
+            <a href="doubleexposure.html">
+                <img src="pictures/filler1.JPG" class="img-fluid rounded hoverable" alt="Responsive image">
+            </a>
+            <br></br>
+        </div>
+        <div class="col-sm">
+            <img src="images/Portraits/Portrait3.JPG" class="img-fluid rounded" alt="Responsive image">
+            <br></br>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm">
+            <img src="images/Buildings/YellowDoor.JPG" class="img-fluid rounded" alt="Responsive image">
+            <br></br>
+        </div>
+        <div class="col-sm">
+            <img src="images/StillLife/Eggs1.JPG" class="img-fluid rounded" alt="Responsive image">
+            <br></br>
+        </div>
+    </div>  
+    <div class="row"> 
+        <div class="col-sm">
+            <img src="images/StillLife/Books2.JPG" class="img-fluid rounded" alt="Responsive image">
+            <br></br>
+        </div>
+        <div class="col-sm" id="last">
+            <img src="images/Portraits/BlackWhitePortrait1.JPG" class="img-fluid rounded" alt="Responsive image">
+        </div>
+    </div>          
+</div>
 {% endblock %}
