@@ -1,4 +1,9 @@
 body {
     font-family: 'Amatic SC', cursive;
     font-weight: 700;
+    padding-top: 6rem;
+}
+
+p {
+    font-size: 1.3rem;
 }
