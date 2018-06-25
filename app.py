@@ -14,6 +14,11 @@ def about():
 def contact():
     return render_template('contact.html')
 
+@app.route('/double-exposure/')
+def double_exposure():
+    return render_template('double-exposure.html')
+
+
 
 
 
