@@ -1,5 +1,5 @@
 {% extends 'layout.html' %} {% block body %}
-<div class="row">
+<!--<div class="row">
     <div class="col-sm">
         <img src="{{url_for('static',filename='2portraitsblacknwhite.JPG')}}" class="img-fluid rounded hoverable" alt="Responsive image">
         <br></br>
@@ -11,7 +11,7 @@
     <div class="col-sm">
         <img src="{{url_for('static',filename='2portraits.JPG')}}" class="img-fluid rounded" alt="Responsive image">
         <br></br>
-    </div>
+    </div>">
     <div class="col-sm">
         <img src="{{url_for('static',filename='2portraits2.JPG')}}" class="img-fluid rounded" alt="Responsive image">
         <br></br>
@@ -53,6 +53,18 @@
         <br></br>
     </div>
 </div>
-</div>
+</div>-->
 
+
+<div class="row">
+    {% for count, img in enumerate(x) %} 
+        {% if count % 4 == 0 %}
+            <div class="w-100"></div>
+        {% endif %}
+        <div class="col-sm">
+            <img src="{{ url_for('static', filename=img + '.JPG') }}" alt="" id="src" class="img-fluid rounded">
+            <br></br>
+        </div>
+    {%endfor%}
+</div>
 {% endblock %}
