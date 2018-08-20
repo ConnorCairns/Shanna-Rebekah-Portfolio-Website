@@ -16,3 +16,28 @@ p {
         font-size: 1.5rem;
     }
 }
+
+.caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+}
+.caption h1 {
+    color: white;
+    font-size: 4.4rem;
+}
+
+.test:hover  .caption {
+    display: block;
+    background-color: black
+}
+.test:hover {
+    background-color: white;
+    opacity: .8;
+}
+.test {
+    position: relative;
+    transition: .3s;
+}

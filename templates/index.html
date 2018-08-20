@@ -1,10 +1,12 @@
 {% extends 'layout.html' %} {% block body %}
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm position-relative text-center">
+        <div class="col-sm test">
             <a href="/double-exposure">
                 <img src="{{url_for('static',filename='16.JPG')}}" class="img-fluid rounded hoverable" alt="Responsive image">
-                <legend>Test</legend>
+                <div class="caption rounded">
+                    <h1>Double Exposure</h1>
+                </div>
             </a>
             <br></br>
         </div>
