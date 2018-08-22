@@ -31,7 +31,6 @@ p {
 
 .test:hover  .caption {
     display: block;
-    background-color: black
 }
 .test:hover {
     background-color: white;
