@@ -10,9 +10,9 @@
 
         <div class="collapse navbar-collapse" id="navbar">
             <div class="navbar-nav ml-auto">
-                <a class="nav-item nav-link h4" href="/"><i class="fas fa-home"></i> Home</a>
-                <a class="nav-item nav-link h4" href="/about/"><i class="far fa-address-card"></i> About</a>
-                <a class="nav-item nav-link h4" href="/contact/"><i class="far fa-address-book"></i> Contact</a>
+                <a class="nav-item nav-link h4" href="{{ url_for('index') }}"><i class="fas fa-home"></i> Home</a>
+                <a class="nav-item nav-link h4" href="{{ url_for('about') }}"><i class="far fa-address-card"></i> About</a>
+                <a class="nav-item nav-link h4" href="{{ url_for('contact') }}"><i class="far fa-address-book"></i> Contact</a>
             </div>
         </div>
     </div>
