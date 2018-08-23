@@ -53,7 +53,7 @@ def login():
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
-            return redirect(next_page) if next_page else redirect(url_for('index'))
+            return redirect(next_page) if next_page else redirect(url_for('account'))
         else:
             flash('Login failed', 'danger')
     return render_template('login.html', title='Login', form=form)
@@ -74,9 +74,9 @@ def update_profile_picture(picture):
     image.save(path)
     return profile_picture_name
 
-@app.route('/account', methods=['GET', 'POST'])
+@app.route('/account/edit', methods=['GET', 'POST'])
 @login_required
-def account():
+def edit():
     form = Edit()
     if form.validate_on_submit():
         if form.profile_picture.data:
@@ -91,4 +91,15 @@ def account():
         form.username.data = current_user.username
         form.email.data = current_user.email
     image = url_for('static', filename='profile pictures/' + current_user.profile_picture)
-    return render_template('account.html', title='Account', image=image, form=form)
+    return render_template('edit.html', title='Edit Account', image=image, form=form)
+
+@app.route('/account', methods=['GET'])
+@login_required
+def account():
+    form = Edit()
+    if request.method == 'GET':
+        form.username.data = current_user.username
+        form.email.data = current_user.email
+    image = url_for('static', filename='profile pictures/' + current_user.profile_picture)
+    return render_template('account.html', title='Edit Account', image=image, form=form)
+
