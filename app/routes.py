@@ -1,9 +1,10 @@
 from flask import render_template, url_for, flash, redirect, request
 from app import app, db, bcrypt
-from app.forms import Registration, Login
+from app.forms import Registration, Login, Edit
 from app.models import User, Photos
 from flask_login import login_user, logout_user, current_user, login_required
-
+import secrets, os
+from PIL import Image
 
 @app.route('/')
 def index():
@@ -62,7 +63,32 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
-@app.route('/account')
+def update_profile_picture(picture):
+    name = secrets.token_hex(8)
+    _, ext = os.path.splitext(picture.filename)
+    profile_picture_name = name + ext
+    path = os.path.join(app.root_path, 'static', 'profile pictures' , profile_picture_name)
+    size = (125, 125)
+    image = Image.open(picture)
+    image.thumbnail(size)
+    image.save(path)
+    return profile_picture_name
+
+@app.route('/account', methods=['GET', 'POST'])
 @login_required
 def account():
-    return render_template('account.html', title='Account')
+    form = Edit()
+    if form.validate_on_submit():
+        if form.profile_picture.data:
+            picture = update_profile_picture(form.profile_picture.data)
+            current_user.profile_picture = picture
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        db.session.commit()
+        flash(f'Account information updated', 'info')
+        return redirect(url_for('account'))
+    elif request.method == 'GET':
+        form.username.data = current_user.username
+        form.email.data = current_user.email
+    image = url_for('static', filename='profile pictures/' + current_user.profile_picture)
+    return render_template('account.html', title='Account', image=image, form=form)
