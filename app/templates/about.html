@@ -1,17 +1,24 @@
 {% extends 'layout.html' %} {% block body %}
-<div class="jumbotron">
-    <h1 class="display-4">About</h1>
-    <hr class=my-2>
-    <p class="font-weight-normal">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam porta convallis arcu quis aliquam. Proin lacus magna,
-        laoreet in elit rutrum, aliquet dignissim ligula. Vivamus at neque mollis, lacinia nunc nec, porttitor neque. Quisque
-        luctus eros et fermentum malesuada. In eu maximus erat. Aliquam in egestas neque. Mauris vel massa velit. Etiam ultrices
-        vel risus et posuere. Suspendisse eu suscipit enim. In hac habitasse platea dictumst. Mauris ac orci lacus. Curabitur
-        a venenatis purus. Maecenas lacinia lectus ut mattis ultricies. Sed nibh libero, condimentum vel massa finibus, gravida
-        imperdiet urna. Aenean non risus pharetra erat tincidunt accumsan. Integer faucibus odio ut mollis egestas. Vestibulum
-        aliquam eros id metus aliquam dignissim. Aliquam enim tortor, malesuada in suscipit at, pellentesque a sem. Vivamus
-        vitae consequat purus. Curabitur lacinia id ex non vehicula. Curabitur pulvinar orci et magna auctor pharetra. Sed
-        congue risus quis lacinia ornare. Quisque ac sem non sapien hendrerit ornare dictum eget justo. Aenean interdum tortor
-        sed imperdiet dignissim. Aliquam condimentum lacus ac lorem eleifend, eu lobortis velit egestas.</p>
+<div class="container-fluid">
+    <div class="row text-center title align-items-center">
+        <div class="col-6">
+            <img class="rounded-circle profile-picture float-right" src="{{  url_for('static', filename='Profile pictures/shanna.jpg')  }}">
+        </div>
+        <div class="col-6">
+            <h1 class="display-4 float-left">About</h1>
+        </div>
+            <hr class="my-2 pb-3">
+            <p class="font-weight-normal">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam porta convallis arcu quis aliquam. Proin lacus magna,
+                laoreet in elit rutrum, aliquet dignissim ligula. Vivamus at neque mollis, lacinia nunc nec, porttitor neque. Quisque
+                luctus eros et fermentum malesuada. In eu maximus erat. Aliquam in egestas neque. Mauris vel massa velit. Etiam ultrices
+                vel risus et posuere. Suspendisse eu suscipit enim. In hac habitasse platea dictumst. Mauris ac orci lacus. Curabitur
+                a venenatis purus. Maecenas lacinia lectus ut mattis ultricies. Sed nibh libero, condimentum vel massa finibus, gravida
+                imperdiet urna. Aenean non risus pharetra erat tincidunt accumsan. Integer faucibus odio ut mollis egestas. Vestibulum
+                aliquam eros id metus aliquam dignissim. Aliquam enim tortor, malesuada in suscipit at, pellentesque a sem. Vivamus
+                vitae consequat purus. Curabitur lacinia id ex non vehicula. Curabitur pulvinar orci et magna auctor pharetra. Sed
+                congue risus quis lacinia ornare. Quisque ac sem non sapien hendrerit ornare dictum eget justo. Aenean interdum tortor
+                sed imperdiet dignissim. Aliquam condimentum lacus ac lorem eleifend, eu lobortis velit egestas.</p>
+        </div>
+    </div>
 </div>
-
 {% endblock %}

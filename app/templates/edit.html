@@ -1,6 +1,5 @@
 {% extends 'layout.html' %} {% block body %}
-
-<div class = "content-section">
+<div class = "container">
     <form method="POST" action="" enctype="multipart/form-data">
         {{ form.hidden_tag() }}
         <fieldset class="form-group">
@@ -45,7 +44,7 @@
             {{ form.submit(class="btn btn-outline-info") }}
         </div>
     </form>
-</div>
+<!-- Div is left open on purpose to include footer in container -->
 
 
 {% endblock %}
