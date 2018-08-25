@@ -1,6 +1,6 @@
 from flask import render_template, url_for, flash, redirect, request
 from app import app, db, bcrypt
-from app.forms import Registration, Login, Edit
+from app.forms import Registration, Login, Edit, AddPhoto
 from app.models import User, Photos
 from flask_login import login_user, logout_user, current_user, login_required
 import secrets, os
@@ -96,10 +96,28 @@ def edit():
 @app.route('/account', methods=['GET'])
 @login_required
 def account():
+    #photo = Photos.query.filter_by(user_id=current_user.id).first().photo_link
+    photo = Photos.query.filter_by(user_id=current_user.id).all()
+    list = []
+    for i in range(0,len(photo)):
+        temp = photo[i].photo_link
+        list.append(temp)
     form = Edit()
     if request.method == 'GET':
         form.username.data = current_user.username
         form.email.data = current_user.email
     image = url_for('static', filename='profile pictures/' + current_user.profile_picture)
-    return render_template('account.html', title='Edit Account', image=image, form=form)
+    return render_template('account.html', title='Edit Account', image=image, form=form, photo=list, enumerate=enumerate)
 
+@app.route('/photo/new', methods=['GET', 'POST'])
+@login_required
+def new_photo():
+    form = AddPhoto()
+    if form.validate_on_submit():
+        client = User.query.filter_by(email=form.client.data).first()
+        photo = Photos(photo_name=form.name.data, photo_category=form.category.data, photo_link=form.link.data, client=client)
+        db.session.add(photo)
+        db.session.commit()
+        flash(f'Image information added', 'info')
+        return redirect(url_for('index'))
+    return render_template('new_photo.html', title="New Photo", form=form)

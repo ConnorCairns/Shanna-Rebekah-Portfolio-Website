@@ -10,6 +10,17 @@
             <a class="btn btn-lg btn-outline-primary" href="{{ url_for('edit') }}">Edit information</a>
         </div>
     </div>
-</div>
+    <div class="container-fluid pt-4">
+        <div class="row">
+            {% for count, img in enumerate(photo) %} {% if count % 4 == 0 %}
+            <div class="w-100"></div>
+            {% endif %}
+            <div class="col-sm">
+                <img src="{{ img }}" alt="hihihji" class="img-fluid rounded">
+                <br></br>
+            </div>
+            {%endfor%}
+        </div>
+    </div>
 
 {% endblock %}
