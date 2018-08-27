@@ -22,3 +22,24 @@ pip install -r requirements.txt
 python db.py
 python app.py
 ```
+
+### Mail
+For email to work for password reset etc. environment variables need to be set for username and password
+Web server will have to be restarted after adding
+
+#### Linux
+```
+nano .bash_profile (or equivalent ex. .zshrc)
+export email_username="email"
+export email_pass="password"
+```
+
+#### Windows
+```
+control panel
+system and security
+system
+advanced system settings
+environment variables
+```
+
