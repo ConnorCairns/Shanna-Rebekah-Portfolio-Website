@@ -96,7 +96,6 @@ def edit():
 @app.route('/account', methods=['GET'])
 @login_required
 def account():
-    #photo = Photos.query.filter_by(user_id=current_user.id).first().photo_link
     photo = Photos.query.filter_by(user_id=current_user.id).all()
     list = []
     for i in range(0,len(photo)):
