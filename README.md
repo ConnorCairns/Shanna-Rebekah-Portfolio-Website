@@ -11,7 +11,7 @@ python3 -m venv venv
 . venv/bin/activate
 pip install -r requirements.txt
 python db.py
-python app.py
+python run.py
 ```
 
 ### Windows
@@ -20,7 +20,7 @@ py -3 -m venv venv
 venv\Scripts\activate
 pip install -r requirements.txt
 python db.py
-python app.py
+python run.py
 ```
 
 ### Mail
