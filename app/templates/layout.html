@@ -15,12 +15,14 @@
 
 <body>
   {% include 'includes/navbar.html' %}
+    <div class="container-fluid">
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
         {% for category, message in messages %}
           <div class="alert alert-{{ category }}">
             {{ message }}
           </div>
+    </div>
         {% endfor %}
       {% endif %}
     {%  endwith %}

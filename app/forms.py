@@ -46,9 +46,23 @@ class Edit(FlaskForm):
             if email:
                 raise ValidationError('Email already has an account created')
 
-class AddPhoto(FlaskForm):
+class Add_Photo(FlaskForm):
     name = StringField("Image Name", validators=[DataRequired()])
     category = StringField("Image Category", validators=[DataRequired()])
     link = StringField("Image Link", validators=[DataRequired()])
     client = StringField("Client Email", validators=[DataRequired(), Email()])
     submit = SubmitField("Add photo")
+
+class email_reset_pass(FlaskForm):
+     email = StringField("Email", validators=[DataRequired(),Email()])
+     submit = SubmitField("Request password reset")
+     
+     def validate_email(self, email):
+        email = User.query.filter_by(email=email.data).first()
+        if email is None:
+            raise ValidationError('No account created for that email')
+
+class reset_pass(FlaskForm):
+    password = PasswordField("Password", validators=[DataRequired()])
+    password_confirm = PasswordField("Confirm Password", validators=[DataRequired(),EqualTo("password")])
+    submit = SubmitField("Reset Password")
