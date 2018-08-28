@@ -23,8 +23,9 @@ python db.py
 python run.py
 ```
 
-### Mail
+## Mail
 For email to work for password reset etc. environment variables need to be set for username and password
+<br>
 Web server will have to be restarted after adding
 
 #### Linux
