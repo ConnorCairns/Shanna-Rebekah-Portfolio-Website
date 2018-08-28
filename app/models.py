@@ -1,7 +1,8 @@
 from app import db, login_manager
-from flask_login import UserMixin
+from flask_login import UserMixin, current_user
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
-from flask import current_app
+from flask import current_app, abort
+from functools import wraps
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -13,6 +14,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(60), nullable=False)
     profile_picture = db.Column(db.String(20), nullable=False, default='default.jpg')
+    role = db.Column(db.String(10), nullable=False, default='Client')
     photos = db.relationship('Photos', backref='client', lazy=True)
 
     def reset_token(self, expire=1800):
@@ -27,9 +29,23 @@ class User(db.Model, UserMixin):
         except:
             return None
         return User.query.get(user_id)
+    
+    @staticmethod
+    def must_be_role(role):
+        def must_be_role_decorator(func):  # Check that the current user is actually a student
+            @wraps(func)  # Use built-in boilerplate code
+            def role_checker(*args, **kwargs):
+                if current_user.role != role:
+                    return abort(403)
+                else:
+                    return func(*args, **kwargs)  # If all fine, execute function anyway
+                    
+            return role_checker
+        return must_be_role_decorator
 
     def __repr__(self):
         return f"User('{self.username}','{self.email}','{self.profile_picture}')"
+
 
 
 class Photos(db.Model):

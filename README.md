@@ -23,8 +23,8 @@ python db.py
 python run.py
 ```
 
-## Mail
-For email to work for password reset etc. environment variables need to be set for username and password
+## Environment variables
+For all features to work environment variables need to be set for email username and password, database URI and secret key
 <br>
 Web server will have to be restarted after adding
 

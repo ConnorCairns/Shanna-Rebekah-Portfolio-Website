@@ -1,13 +1,14 @@
 from flask import Blueprint, render_template, url_for, flash, redirect, request
 from flask_login import current_user, login_required
 from app import db
-from app.models import Photos
+from app.models import Photos, User
 from app.pictures.forms import Add_Photo
 
 pictures = Blueprint('pictures', __name__)
 
 @pictures.route('/photo/new', methods=['GET', 'POST'])
 @login_required
+@User.must_be_role("Admin")
 def new_photo():
     form = Add_Photo()
     if form.validate_on_submit():
