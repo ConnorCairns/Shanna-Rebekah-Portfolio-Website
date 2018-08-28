@@ -1,9 +1,9 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
-from wtforms.validators import DataRequired, length, Email, EqualTo, ValidationError
-from app.models import User
+from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError, length
 from flask_login import current_user
+from app.models import User
 
 class Registration(FlaskForm):
     username = StringField("Username", validators=[DataRequired(),length(min=2, max=20)])
@@ -45,13 +45,6 @@ class Edit(FlaskForm):
             email = User.query.filter_by(email=email.data).first()
             if email:
                 raise ValidationError('Email already has an account created')
-
-class Add_Photo(FlaskForm):
-    name = StringField("Image Name", validators=[DataRequired()])
-    category = StringField("Image Category", validators=[DataRequired()])
-    link = StringField("Image Link", validators=[DataRequired()])
-    client = StringField("Client Email", validators=[DataRequired(), Email()])
-    submit = SubmitField("Add photo")
 
 class email_reset_pass(FlaskForm):
      email = StringField("Email", validators=[DataRequired(),Email()])
