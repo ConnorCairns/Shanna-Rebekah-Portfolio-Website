@@ -26,8 +26,10 @@ def start(config_class=config):
     from app.users.routes import users
     from app.pictures.routes import pictures
     from app.main.routes import main
+    from app.errors.handlers import errors
     app.register_blueprint(users)
     app.register_blueprint(pictures)
     app.register_blueprint(main)
+    app.register_blueprint(errors)
 
     return app
