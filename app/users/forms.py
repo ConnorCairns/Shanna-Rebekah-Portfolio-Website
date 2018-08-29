@@ -60,4 +60,7 @@ class reset_pass(FlaskForm):
     password_confirm = PasswordField("Confirm Password", validators=[DataRequired(),EqualTo("password")])
     submit = SubmitField("Reset Password")
 
+class search(FlaskForm):
+    search_query = StringField("Search", validators=[DataRequired()])
+
 

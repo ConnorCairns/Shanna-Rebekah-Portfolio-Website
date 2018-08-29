@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, url_for, flash, redirect, request
 from flask_login import login_user, current_user, logout_user, login_required
 from app import db, bcrypt
 from app.models import User, Photos
-from app.users.forms import Registration, Login, Edit, email_reset_pass, reset_pass
+from app.users.forms import Registration, Login, Edit, email_reset_pass, reset_pass, search
 from app.users.utils import update_profile_picture, send_reset_email
 from wtforms.validators import ValidationError
 
@@ -43,7 +43,7 @@ def logout():
     logout_user()
     return redirect(url_for('main.index'))
 
-@users.route('/account', methods=['GET'])
+@users.route('/account', methods=['GET','POST'])
 @login_required
 def account():
     photo = Photos.query.filter_by(user_id=current_user.id).all()
@@ -52,11 +52,17 @@ def account():
         temp = photo[i].photo_link
         list.append(temp)
     form = Edit()
+    search_form = search()
     if request.method == 'GET':
         form.username.data = current_user.username
         form.email.data = current_user.email
+    if search_form.validate_on_submit():
+        #photo = Photos.query.filter_by(photo_name.like("%{search_form.search_query.data}%")).all()
+        for i in range(0,len(photo)):
+            temp = photo[i].photo_link
+            list.append(temp)
     image = url_for('static', filename='profile pictures/' + current_user.profile_picture)
-    return render_template('account.html', title='Edit Account', image=image, form=form, photo=list, enumerate=enumerate)
+    return render_template('account.html', title='Edit Account', image=image, form=form, photo=list, enumerate=enumerate, search_form=search_form)
 
 @users.route('/reset_password', methods=['GET', 'POST'])
 def request_reset_email():

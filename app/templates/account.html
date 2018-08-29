@@ -13,6 +13,30 @@
             <a class="btn btn-lg btn-outline-primary" href="{{ url_for('users.edit') }}">Edit information</a>
         </div>
     </div>
+    <div>
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <hr class=my-4>
+                <div class="form-group">
+                    {{ search_form.search_query.label(class="form-control-label") }}
+                    {% if search_form.search_query.errors %}
+                        {{ search_form.search_query(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in search_form.search_query.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ search_form.search_query(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+            </fieldset>
+            <!--<div class="form-group">
+                {{ form.submit(class="btn btn-lg btn-outline-info") }}
+            </div>-->
+        </form>
+    </div>
     <div class="container-fluid pt-4">
         <div class="row">
             {% for count, img in enumerate(photo) %} {% if count % 4 == 0 %}
