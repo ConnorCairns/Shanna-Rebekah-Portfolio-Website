@@ -48,12 +48,18 @@ p {
     margin-bottom: 16px;
 }
 
-.title {
+.small-width {
     width: 75%;
     margin: 0 auto;
 }
 
-.title hr {
+.small-width hr {
     border-top: 2px solid black;
     width: 95%;
 }
+
+.btn-center {
+    width: 100%;
+    margin: 0 auto;
+}
+

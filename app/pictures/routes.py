@@ -17,5 +17,5 @@ def new_photo():
         db.session.add(photo)
         db.session.commit()
         flash('Image information added', 'info')
-        return redirect(url_for('main.index'))
+        return redirect(url_for('pictures.new_photo'))
     return render_template('new_photo.html', title="New Photo", form=form)
