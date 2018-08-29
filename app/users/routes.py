@@ -4,6 +4,7 @@ from app import db, bcrypt
 from app.models import User, Photos
 from app.users.forms import Registration, Login, Edit, email_reset_pass, reset_pass
 from app.users.utils import update_profile_picture, send_reset_email
+from wtforms.validators import ValidationError
 
 users = Blueprint('users', __name__)
 
@@ -14,7 +15,7 @@ def register():
     form = Registration()
     if form.validate_on_submit():
         hashed_pw = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user = User(username=form.username.data, email=form.email.data, password=hashed_pw)
+        user = User(username=form.username.data.lower(), email=form.email.data.lower(), password=hashed_pw)
         db.session.add(user)
         db.session.commit()
         flash(f'Account created for {form.username.data}!', 'success')
@@ -28,7 +29,7 @@ def login():
         return redirect(url_for('main.index'))
     form = Login()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
+        user = User.query.filter_by(email=form.email.data.lower()).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')

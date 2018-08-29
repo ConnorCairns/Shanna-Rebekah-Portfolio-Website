@@ -32,13 +32,13 @@ class User(db.Model, UserMixin):
     
     @staticmethod
     def must_be_role(role):
-        def must_be_role_decorator(func):  # Check that the current user is actually a student
-            @wraps(func)  # Use built-in boilerplate code
+        def must_be_role_decorator(func):
+            @wraps(func)
             def role_checker(*args, **kwargs):
                 if current_user.role != role:
                     return abort(403)
                 else:
-                    return func(*args, **kwargs)  # If all fine, execute function anyway
+                    return func(*args, **kwargs)
                     
             return role_checker
         return must_be_role_decorator

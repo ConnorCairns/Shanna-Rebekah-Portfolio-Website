@@ -18,7 +18,7 @@ class Registration(FlaskForm):
             raise ValidationError('Username taken')
     
     def validate_email(self, email):
-        email = User.query.filter_by(email=email.data).first()
+        email = User.query.filter_by(email=str(email.data).lower()).first()
         if email:
             raise ValidationError('Email already has an account created')
 
