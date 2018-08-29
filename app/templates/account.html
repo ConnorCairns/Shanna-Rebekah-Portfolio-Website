@@ -6,7 +6,7 @@
         <div class="media-body">
             <a class="btn btn-lg btn-outline-danger float-right" href="{{ url_for('users.logout') }}">Log out</a>
             {% if current_user.role == "Admin" %}
-            <a class="btn btn-lg btn-outline-info float-right mr-2" href="{{ url_for('pictures.new_photo') }}">Add Photo</a>
+            <a class="btn btn-lg btn-outline-info float-lg-right mr-2 hide" href="{{ url_for('pictures.new_photo') }}">Add Photo</a>
             {% endif %}
             <h2>{{ current_user.username }}</h2>
             <p class="text-secondary">{{ current_user.email }}</p>
