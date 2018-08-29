@@ -63,3 +63,7 @@ p {
     margin: 0 auto;
 }
 
+.bigger-text {
+    font-size: 1.2rem;
+}
+

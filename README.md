@@ -33,6 +33,8 @@ Web server will have to be restarted after adding
 nano .bash_profile (or equivalent ex. .zshrc)
 export email_username="email"
 export email_pass="password"
+export shanna_db="sqlite:///name.db"
+export shanna_secret_key="secret key"
 ```
 
 #### Windows

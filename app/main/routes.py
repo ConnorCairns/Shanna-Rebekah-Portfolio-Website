@@ -1,4 +1,6 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, flash, redirect, url_for
+from app.main.forms import contact_form
+from app.main.utils import send_email
 
 main = Blueprint('main', __name__)
 
@@ -11,10 +13,14 @@ def index():
 def about():
     return render_template('about.html')
 
-
-@main.route('/contact/')
+@main.route('/contact/', methods=['GET','POST'])
 def contact():
-    return render_template('contact.html')
+    form = contact_form()
+    if form.validate_on_submit():
+        send_email(form)
+        flash(f'Email sent!', 'success')
+        return redirect(url_for('main.index'))
+    return render_template('contact.html', form=form)
 
 
 @main.route('/double-exposure/')

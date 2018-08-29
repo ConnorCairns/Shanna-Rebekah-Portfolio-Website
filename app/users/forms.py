@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
-from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError, length
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField, TextAreaField
+from wtforms.validators import DataRequired, length, Email, EqualTo, ValidationError
 from flask_login import current_user
 from app.models import User
 
@@ -59,3 +59,5 @@ class reset_pass(FlaskForm):
     password = PasswordField("Password", validators=[DataRequired()])
     password_confirm = PasswordField("Confirm Password", validators=[DataRequired(),EqualTo("password")])
     submit = SubmitField("Reset Password")
+
+
