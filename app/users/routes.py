@@ -5,6 +5,7 @@ from app.models import User, Photos
 from app.users.forms import Registration, Login, Edit, email_reset_pass, reset_pass, search
 from app.users.utils import update_profile_picture, send_reset_email
 from wtforms.validators import ValidationError
+from sqlalchemy import and_
 
 users = Blueprint('users', __name__)
 
@@ -57,7 +58,8 @@ def account():
         form.username.data = current_user.username
         form.email.data = current_user.email
     if search_form.validate_on_submit():
-        #photo = Photos.query.filter_by(photo_name.like("%{search_form.search_query.data}%")).all()
+        list = [] #needs to be here otherwise original photos stay on the page
+        photo = Photos.query.filter(and_(Photos.photo_name.like("%" + search_form.search_query.data + "%"), Photos.user_id==current_user.id)).all()
         for i in range(0,len(photo)):
             temp = photo[i].photo_link
             list.append(temp)

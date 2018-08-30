@@ -67,6 +67,10 @@ p {
     font-size: 1.2rem;
 }
 
+.xs-width {
+    max-width: 25%;
+}
+
 @media (max-width: 767.98px) {
     .hide {
         display: none;
