@@ -14,8 +14,6 @@ def s3_upload(name):
     path = "app/static/temp/" + name + ".JPG"
     image = open(path, 'rb')
     s3.Bucket('shanna-rebekah-photography').put_object(Key=f'{name}.JPG', ContentType='image/png',Body=image)
-    #with open(picture, 'rb') as data:
-    #    s3.upload_fileobj(data, 'shanna-rebekah-photography', name)
 
 
 def save_pic(picture, name):
@@ -23,3 +21,7 @@ def save_pic(picture, name):
     path = os.path.join(current_app.root_path, 'static', 'temp' , fname)
     image = Image.open(picture)
     image.save(path)
+
+def del_pic(name):
+    path = "app/static/temp/" + name + ".JPG"
+    os.remove(path)
