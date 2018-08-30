@@ -26,3 +26,4 @@ def send_reset_email(user):
 If you did not make request dw
 '''
     mail.send(msg)
+

@@ -23,8 +23,8 @@ def contact():
     return render_template('contact.html', form=form)
 
 
-@main.route('/double-exposure/')
-def double_exposure():
+@main.route('/portraits/')
+def portraits():
     x = ["1", "2", "3", "4", "5", "6", "7", "8", "9",
          "10", "11", "12", "13", "14", "15", "16"]
-    return render_template('double-exposure.html', x=x, enumerate=enumerate)
+    return render_template('portraits.html', x=x, enumerate=enumerate)
