@@ -3,7 +3,7 @@ from flask_login import current_user, login_required
 from app import db
 from app.models import Photos, User
 from app.pictures.forms import Add_Photo
-from app.pictures.utils import s3_upload
+from app.pictures.utils import s3_upload, save_pic
 
 pictures = Blueprint('pictures', __name__)
 
@@ -18,8 +18,8 @@ def new_photo():
         photo = Photos(photo_name=form.name.data, photo_category=form.category.data, photo_link=link, client=client)
         db.session.add(photo)
         db.session.commit()
-        pic = form.picture.data
-        s3_upload(pic, form.name.data)
+        save_pic(form.picture.data, form.name.data)
+        s3_upload(form.name.data)
         flash('Image information added', 'info')
         return redirect(url_for('pictures.new_photo'))
     return render_template('new_photo.html', title="New Photo", form=form)
