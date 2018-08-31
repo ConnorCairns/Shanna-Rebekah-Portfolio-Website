@@ -27,3 +27,8 @@ If you did not make request dw
 '''
     mail.send(msg)
 
+def get_photo(photo, list):
+    for i in range(0,len(photo)):
+        temp = photo[i].photo_name
+        list.append(temp)
+    return list

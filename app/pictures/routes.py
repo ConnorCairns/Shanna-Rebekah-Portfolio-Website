@@ -3,7 +3,7 @@ from flask_login import current_user, login_required
 from app import db
 from app.models import Photos, User
 from app.pictures.forms import Add_Photo
-from app.pictures.utils import s3_upload, save_pic, del_pic
+from app.pictures.utils import s3_upload, save_pic, del_pic, s3_download
 
 pictures = Blueprint('pictures', __name__)
 
@@ -13,8 +13,8 @@ pictures = Blueprint('pictures', __name__)
 def new_photo():
     form = Add_Photo()
     if form.validate_on_submit():
-        client = User.query.filter_by(email=form.client.data).first()
-        link = f'https://s3.eu-west-2.amazonaws.com/shanna-rebekah-photography/{form.name.data}.JPG'
+        client = User.query.filter_by(email=form.client.data).first_or_404()
+        link = f's3.eu-west-2.amazonaws.com/shanna-rebekah-photography/{form.name.data}.JPG'
         photo = Photos(photo_name=form.name.data, photo_category=form.category.data, photo_link=link, client=client)
         db.session.add(photo)
         db.session.commit()
@@ -24,3 +24,8 @@ def new_photo():
         flash('Image information added', 'info')
         return redirect(url_for('pictures.new_photo'))
     return render_template('new_photo.html', title="New Photo", form=form)
+
+@pictures.route('/getmethod/<jsdata>.JPG')
+def get_js_data(jsdata):
+    s3_download(jsdata)
+    return redirect(url_for('users.account'))

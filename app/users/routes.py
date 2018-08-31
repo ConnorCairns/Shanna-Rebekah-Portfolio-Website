@@ -3,9 +3,9 @@ from flask_login import login_user, current_user, logout_user, login_required
 from app import db, bcrypt
 from app.models import User, Photos
 from app.users.forms import Registration, Login, Edit, email_reset_pass, reset_pass, search
-from app.users.utils import update_profile_picture, send_reset_email
+from app.users.utils import update_profile_picture, send_reset_email, get_photo
 from wtforms.validators import ValidationError
-from sqlalchemy import and_
+from sqlalchemy import and_, or_
 
 users = Blueprint('users', __name__)
 
@@ -30,7 +30,7 @@ def login():
         return redirect(url_for('main.index'))
     form = Login()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data.lower()).first()
+        user = User.query.filter_by(email=form.email.data.lower()).first_or_404()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
@@ -49,9 +49,7 @@ def logout():
 def account():
     photo = Photos.query.filter_by(user_id=current_user.id).all()
     list = []
-    for i in range(0,len(photo)):
-        temp = photo[i].photo_link
-        list.append(temp)
+    get_photo(photo, list)
     form = Edit()
     search_form = search()
     if request.method == 'GET':
@@ -60,9 +58,11 @@ def account():
     if search_form.validate_on_submit():
         list = [] #needs to be here otherwise original photos stay on the page
         photo = Photos.query.filter(and_(Photos.photo_name.like("%" + search_form.search_query.data + "%"), Photos.user_id==current_user.id)).all()
-        for i in range(0,len(photo)):
-            temp = photo[i].photo_link
-            list.append(temp)
+        if photo:
+            get_photo(photo, list)
+        else:
+            photo = Photos.query.filter(and_(Photos.photo_category.like("%" + search_form.search_query.data + "%"), Photos.user_id==current_user.id)).all()
+            get_photo(photo, list)
     image = url_for('static', filename='profile pictures/' + current_user.profile_picture)
     return render_template('account.html', title='Edit Account', image=image, form=form, photo=list, enumerate=enumerate, search_form=search_form)
 
@@ -72,7 +72,7 @@ def request_reset_email():
         return redirect(url_for('main.index'))
     form = email_reset_pass()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
+        user = User.query.filter_by(email=form.email.data).first_or_404()
         send_reset_email(user)
         flash('Email has been sent pls open', 'info')
         return redirect(url_for('users.login'))
@@ -113,3 +113,9 @@ def edit():
         form.email.data = current_user.email
     image = url_for('static', filename='profile pictures/' + current_user.profile_picture)
     return render_template('edit.html', title='Edit Account', image=image, form=form)
+
+
+#@users.route('/download')
+#def download(jsdata):
+#    data = jsdata
+#    return render_template('download.html', data=data)

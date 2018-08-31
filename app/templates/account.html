@@ -1,5 +1,4 @@
 {% extends 'layout.html' %} {% block body %}
-
 <div class="container-fluid">
     <div class="media">
         <img class="rounded-circle profile-picture" src="{{  image  }}">
@@ -8,7 +7,7 @@
             {% if current_user.role == "Admin" %}
             <a class="btn btn-lg btn-outline-info float-lg-right mr-2 hide" href="{{ url_for('pictures.new_photo') }}">Add Photo</a>
             {% endif %}
-            <h2>{{ current_user.username }}</h2>
+            <h2 id="jstest">{{ current_user.username }}</h2>
             <p class="text-secondary">{{ current_user.email }}</p>
             <a class="btn btn-lg btn-outline-primary" href="{{ url_for('users.edit') }}">Edit information</a>
         </div>
@@ -43,11 +42,21 @@
             <div class="w-100"></div>
             {% endif %}
             <div class="col-sm xs-width">
-                <img src="{{ img }}" alt="Account Picture" class="img-fluid rounded">
+                <img id="{{count}}" src="https://s3.eu-west-2.amazonaws.com/shanna-rebekah-photography/{{ img }}.JPG" alt="Account Picture" class="img-fluid rounded">
+                <a id="{{count}}" class="download mt-2 btn btn-sm btn-outline-secondary" href="{{ url_for('pictures.get_js_data', jsdata=img) }}">Download</a>
                 <br></br>
             </div>
             {%endfor%}
         </div>
     </div>
-
+<script type="text/javascript">
+$(document).on('click', '.download', function(e){
+    var count = e.target.id;
+    var image_src = $('.xs-width #'+count).attr('src');
+    //e.preventDefault();
+    //window.location.href = image_src;
+    //$.get("/getmethod/<image_src>");
+    //href="{{ url_for('pictures.get_js_data', jsdata=count) }}"
+});
+</script>
 {% endblock %}

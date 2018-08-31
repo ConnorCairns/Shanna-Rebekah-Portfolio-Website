@@ -25,3 +25,9 @@ def save_pic(picture, name):
 def del_pic(name):
     path = "app/static/temp/" + name + ".JPG"
     os.remove(path)
+
+def s3_download(data):
+    ndata = data+'.JPG'
+    path = os.path.join(current_app.root_path, 'static', 'temp' , ndata)
+
+    s3.Bucket('shanna-rebekah-photography').download_file(ndata, path)
