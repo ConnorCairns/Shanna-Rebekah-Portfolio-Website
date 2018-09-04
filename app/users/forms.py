@@ -51,7 +51,7 @@ class email_reset_pass(FlaskForm):
      submit = SubmitField("Request password reset")
      
      def validate_email(self, email):
-        email = User.query.filter_by(email=email.data).first()
+        email = User.query.filter_by(email=email.data.lower()).first()
         if email is None:
             raise ValidationError('No account created for that email')
 

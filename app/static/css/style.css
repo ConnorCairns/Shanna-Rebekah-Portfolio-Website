@@ -89,6 +89,11 @@ p {
     font-size: 1.4rem;
 }
 
+.no-padding {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
 @media (max-width: 767.98px) {
     .hide {
         display: none;

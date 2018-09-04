@@ -72,9 +72,9 @@ def request_reset_email():
         return redirect(url_for('main.index'))
     form = email_reset_pass()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first_or_404()
+        user = User.query.filter_by(email=form.email.data.lower()).first_or_404()
         send_reset_email(user)
-        flash('Email has been sent pls open', 'info')
+        flash('Email has been sent to '+form.email.data.lower(), 'info')
         return redirect(url_for('users.login'))
     return render_template('request_reset.html', title='Reset Password', form=form)
 
@@ -83,7 +83,7 @@ def reset_password(token):
     if current_user.is_authenticated:
         return redirect(url_for('main.index'))
     user = User.verify_token(token)
-    if user is None: #if not user
+    if user is None: 
         flash('Invalid or expired token', 'warning')
         return redirect(url_for('users.request_reset_email'))
     form = reset_pass()
