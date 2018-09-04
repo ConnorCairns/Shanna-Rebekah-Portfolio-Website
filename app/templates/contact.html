@@ -1,7 +1,7 @@
 {% extends 'layout.html' %} {% block body %}
 <div class="container-fluid">  
     <div class="row small-width">
-        <div class="col-sm">
+        <div class="col-sm text-center">
             <h1 class="display-4">Contact</h1>
             <hr class=my-2>
             <p class="font-weight-normal text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam porta convallis arcu quis aliquam. Proin lacus magna,
@@ -19,7 +19,7 @@
             <form method="POST" action="">
                 {{ form.hidden_tag() }}
                 <fieldset class="form-group">
-                    <h1 class="display-4">Email Me!</h1>
+                    <h1 class="display-4 text-center">Email Me!</h1>
                     <hr class=my-2>
                     <div class="form-group">
                         {{ form.fname.label(class="form-control-label") }}
@@ -45,6 +45,19 @@
                             </div>
                         {% else %}
                             {{ form.sname(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.email.label(class="form-control-label") }}
+                        {% if form.email.errors %}
+                            {{ form.email(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.email.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.email(class="form-control form-control-lg") }}
                         {% endif %}
                     </div>
                     <div class="form-group">

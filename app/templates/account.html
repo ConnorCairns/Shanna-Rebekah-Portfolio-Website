@@ -42,36 +42,13 @@
             <div class="w-100"></div>
             {% endif %}
             <div class="col-sm xs-width">
-                <img id="{{count}}" src="https://s3.eu-west-2.amazonaws.com/shanna-rebekah-photography/{{ img }}.JPG" alt="Account Picture" class="img-fluid rounded">
-                <a id="{{count}}" class="my-2 btn btn-sm btn-outline-secondary hide" href="{{ url_for('pictures.get_js_data', jsdata=img) }}">View</a>
+                <a href="{{ url_for('pictures.get_js_data', jsdata=img) }}">
+                <img src="https://s3.eu-west-2.amazonaws.com/shanna-rebekah-photography/{{ img }}.JPG" alt="Account Picture" class="img-fluid rounded">
+                </a>
+                <a class="my-2 btn btn-sm btn-outline-secondary hide" href="{{ url_for('pictures.get_js_data', jsdata=img) }}">View</a>
             </div>
             {%endfor%}
         </div>
     </div>
 
-<script type="text/javascript">
-//$(document).on('click', '.download', function(e){
-//    var count = e.target.id;
-//    var image_src = $('.xs-width #'+count).attr('src');
-//    var name = image_src.slice(62);
-//    download(name, image_src)
-//});
-//
-//    
-//function download(name, image_src) {
-//    var a = $('<a>')
-//        .attr('href', "/static/temp/"+name)
-//        .attr('download', name)
-//        .appendTo('body');
-//    a[0].click()
-//    a.remove()
-//};
-//
-//    
-</script>
 {% endblock %}
-
-    <!--e.preventDefault();
-    window.location.href = image_src;
-    $.get("/getmethod/<image_src>");
-    href="{{ url_for('pictures.get_js_data', jsdata=img) }}"-->

@@ -93,4 +93,8 @@ p {
     .hide {
         display: none;
     }
+    
+    body {
+        padding-top: 5rem;
+    }
 }

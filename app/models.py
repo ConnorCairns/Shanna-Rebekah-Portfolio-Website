@@ -52,7 +52,6 @@ class Photos(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     photo_name = db.Column(db.String(20), unique=True, nullable=False)
     photo_category = db.Column(db.String(20), nullable=False)
-    photo_link = db.Column(db.String(20), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
     def __repr__(self):
