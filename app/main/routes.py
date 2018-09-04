@@ -25,6 +25,24 @@ def contact():
 
 @main.route('/portraits/')
 def portraits():
-    x = ["1", "2", "3", "4", "5", "6", "7", "8", "9",
-         "10", "11", "12", "13", "14", "15", "16"]
-    return render_template('portraits.html', x=x, enumerate=enumerate)
+    return render_template('portraits.html')
+
+@main.route('/wedding/')
+def wedding():
+    return render_template('coming_soon.html')
+
+@main.route('/still life/')
+def still_life():
+    return render_template('coming_soon.html')
+
+@main.route('/family/')
+def family():
+    return render_template('coming_soon.html')
+
+@main.route('/fashion/')
+def fashion():
+    return render_template('coming_soon.html')
+
+@main.route('/something/')
+def something():
+    return render_template('coming_soon.html')

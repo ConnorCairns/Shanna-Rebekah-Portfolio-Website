@@ -1,63 +1,57 @@
 {% extends 'layout.html' %} {% block body %}
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm test">
+        <div class="col-sm test mb-4">
             <a href="{{ url_for('main.portraits') }}">
                 <img src="{{url_for('static',filename='Portraits/1Disguise/jade1.JPG')}}" class="img-fluid rounded hoverable regular-width" alt="Responsive image">
-                <div class="caption rounded bg-secondary">
+                <div class="caption rounded bg-secondary px-2">
                     <h1>Portraits</h1>
                 </div>
             </a>
-            <br></br>
         </div>
-        <div class="col-sm test">
-            <a href="/double-exposure">
+        <div class="col-sm test mb-4">
+            <a href="{{ url_for('main.wedding') }}">
                 <img src="{{url_for('static',filename='Portraits/Golden Lines/OTHERPHOTO2.JPG')}}" class="img-fluid rounded hoverable regular-width" alt="Responsive image">
-                <div class="caption rounded bg-secondary">
+                <div class="caption rounded bg-secondary px-2">
                     <h1>Wedding</h1>
                 </div>
             </a>
-            <br></br>
         </div>
     </div>
     <div class="row">
-        <div class="col-sm test">
-            <a href="/double-exposure">
+        <div class="col-sm test mb-4">
+            <a href="{{ url_for('main.still_life') }}">
                 <img src="{{url_for('static',filename='Still Life/Coffee&Cigarettes/important.JPG')}}" class="img-fluid rounded hoverable regular-width" alt="Responsive image">
-                <div class="caption rounded bg-secondary">
+                <div class="caption rounded bg-secondary px-2">
                     <h1>Still Life</h1>
                 </div>
             </a>
-            <br></br>
         </div>
-        <div class="col-sm test">
-            <a href="/double-exposure">
+        <div class="col-sm test mb-4">
+            <a href="{{ url_for('main.family') }}">
                 <img src="{{url_for('static',filename='16.JPG')}}" class="img-fluid rounded hoverable regular-width" alt="Responsive image">
-                <div class="caption rounded bg-secondary">
+                <div class="caption rounded bg-secondary px-2">
                     <h1>Family</h1>
                 </div>
             </a>
-            <br></br>
         </div>
     </div>
     <div class="row">
-        <div class="col-sm test">
-            <a href="/double-exposure">
+        <div class="col-sm test mb-4">
+            <a href="{{ url_for('main.fashion') }}">
                 <img src="{{url_for('static',filename='Fashion Photography/New Folder/2.JPG')}}" class="img-fluid rounded hoverable regular-width" alt="Responsive image">
-                <div class="caption rounded bg-secondary">
+                <div class="caption rounded bg-secondary px-2">
                     <h1>Fashion</h1>
                 </div>
             </a>
-            <br></br>
         </div>
-        <div class="col-sm test">
-            <a href="/double-exposure">
+        <div class="col-sm test mb-4">
+            <a href="{{ url_for('main.something') }}">
                 <img src="{{url_for('static',filename='6.JPG')}}" class="img-fluid rounded hoverable regular-width" alt="Responsive image">
-                <div class="caption rounded bg-secondary">
+                <div class="caption rounded bg-secondary px-2">
                     <h1>Something</h1>
                 </div>
             </a>
-            <br></br>
         </div>
     </div>
 </div>

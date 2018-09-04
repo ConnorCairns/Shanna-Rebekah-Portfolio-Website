@@ -54,7 +54,7 @@ p {
 }
 
 .small-width hr {
-    border-top: 2px solid black;
+    border-top: 2px solid grey;
     width: 100%;
 }
 
@@ -83,6 +83,10 @@ p {
 
 .s-width {
     max-width: 50%;
+}
+
+.icons {
+    font-size: 1.4rem;
 }
 
 @media (max-width: 767.98px) {

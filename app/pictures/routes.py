@@ -25,7 +25,7 @@ def new_photo():
         return redirect(url_for('pictures.new_photo'))
     return render_template('new_photo.html', title="New Photo", form=form)
 
-@pictures.route('/getmethod/<jsdata>.JPG')
+@pictures.route('/picture/<jsdata>.JPG')
 def get_js_data(jsdata):
     s3_download(jsdata)
-    return redirect(url_for('users.account'))
+    return render_template('picture.html', data=jsdata)
