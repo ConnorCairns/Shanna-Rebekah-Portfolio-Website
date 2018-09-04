@@ -4,7 +4,7 @@ from PIL import Image
 from flask import url_for
 from flask_mail import Message
 from app import mail
-from flask import current_app
+from flask import current_app, render_template
 
 def update_profile_picture(picture):
     name = secrets.token_hex(8)
@@ -19,12 +19,8 @@ def update_profile_picture(picture):
 
 def send_reset_email(user):
     token = user.reset_token()
-    msg = Message('Password Reset Request', sender='noreply@demo.com', recipients=[user.email])
-    msg.body = f'''To reset password pls click link:
-{url_for('users.reset_password', token=token, _external=True)}
-
-If you did not make request dw
-'''
+    msg = Message('Password Reset Request', sender='Shanna Rebekah Photography', recipients=[user.email])
+    msg.html = render_template("emails/password_reset.html", token=token )
     mail.send(msg)
 
 def get_photo(photo, list):
