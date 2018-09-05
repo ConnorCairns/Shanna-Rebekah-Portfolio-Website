@@ -23,7 +23,7 @@ def new_photo():
         del_pic(form.name.data)
         flash('Image information added', 'info')
         return redirect(url_for('pictures.new_photo'))
-    return render_template('new_photo.html', title="New Photo", form=form)
+    return render_template('account/new_photo.html', title="New Photo", form=form)
 
 @pictures.route('/picture/<jsdata>.JPG')
 @login_required
@@ -31,6 +31,6 @@ def get_js_data(jsdata):
     user = Photos.query.filter(and_(Photos.photo_name==jsdata, Photos.user_id==current_user.id)).first_or_404()
     if user:
         s3_download(jsdata)
-        return render_template('picture.html', data=jsdata)
+        return render_template('account/picture.html', data=jsdata)
     else:
         return render_template('errors/error_403.html'), 403

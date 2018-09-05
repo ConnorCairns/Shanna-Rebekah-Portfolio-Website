@@ -21,7 +21,7 @@ def register():
         db.session.commit()
         flash(f'Account created for {form.username.data}!', 'success')
         return redirect(url_for('users.login'))
-    return render_template('register.html', title='Register', form=form)
+    return render_template('login/register.html', title='Register', form=form)
 
 
 @users.route('/login', methods=['GET', 'POST'])
@@ -38,7 +38,7 @@ def login():
         else:
             flash('Login failed', 'danger')
 
-    return render_template('login.html', title='Login', form=form)
+    return render_template('login/login.html', title='Login', form=form)
 
 @users.route('/logout')
 def logout():
@@ -65,7 +65,7 @@ def account():
             photo = Photos.query.filter(and_(Photos.photo_category.like("%" + search_form.search_query.data + "%"), Photos.user_id==current_user.id)).all()
             get_photo(photo, list)
     image = url_for('static', filename='profile_pictures/' + current_user.profile_picture)
-    return render_template('account.html', title='Edit Account', image=image, form=form, photo=list, enumerate=enumerate, search_form=search_form)
+    return render_template('account/account.html', title='Edit Account', image=image, form=form, photo=list, enumerate=enumerate, search_form=search_form)
 
 @users.route('/reset_password', methods=['GET', 'POST'])
 def request_reset_email():
@@ -77,7 +77,7 @@ def request_reset_email():
         send_reset_email(user)
         flash('Email has been sent to '+form.email.data.lower(), 'info')
         return redirect(url_for('users.login'))
-    return render_template('request_reset.html', title='Reset Password', form=form)
+    return render_template('login/request_reset.html', title='Reset Password', form=form)
 
 @users.route('/reset_password/<token>', methods=['GET', 'POST'])
 def reset_password(token):
@@ -94,7 +94,7 @@ def reset_password(token):
         db.session.commit()
         flash(f'Password for {user.username} updated!', 'success')
         return redirect(url_for('users.login'))
-    return render_template('reset_pass.html', title='Reset Password', form=form)
+    return render_template('login/reset_pass.html', title='Reset Password', form=form)
 
 @users.route('/account/edit', methods=['GET', 'POST'])
 @login_required
@@ -113,7 +113,7 @@ def edit():
         form.username.data = current_user.username
         form.email.data = current_user.email
     image = url_for('static', filename='profile pictures/' + current_user.profile_picture)
-    return render_template('edit.html', title='Edit Account', image=image, form=form)
+    return render_template('account/edit.html', title='Edit Account', image=image, form=form)
 
 
 #@users.route('/download')

@@ -22,10 +22,26 @@ def contact():
         return redirect(url_for('main.index'))
     return render_template('contact.html', form=form)
 
-
+# portraits
 @main.route('/portraits/')
 def portraits():
-    return render_template('portraits.html')
+    return render_template('portraits/portraits.html')
+
+@main.route('/portraits/disguise')
+def portraits_disguise():
+    return render_template('portraits/disguise.html')
+
+@main.route('/portraits/something')
+def portraits_something():
+    return render_template('portraits/something.html')
+
+@main.route('/portraits/somethingelse')
+def portraits_somethingelse():
+    return render_template('portraits/somethingelse.html')
+
+@main.route('/portraits/frustration')
+def portraits_frustration():
+    return render_template('portraits/frustration.html')
 
 @main.route('/wedding/')
 def wedding():
