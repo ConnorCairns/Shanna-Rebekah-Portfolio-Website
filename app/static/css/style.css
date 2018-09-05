@@ -77,6 +77,10 @@ p {
     font-size: 1.2rem;
 }
 
+.smaller-text {
+    font-size: 0.9rem;
+}
+
 .xs-width {
     max-width: 25%;
 }
