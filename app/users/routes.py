@@ -37,6 +37,7 @@ def login():
             return redirect(next_page) if next_page else redirect(url_for('users.account'))
         else:
             flash('Login failed', 'danger')
+
     return render_template('login.html', title='Login', form=form)
 
 @users.route('/logout')
@@ -63,7 +64,7 @@ def account():
         else:
             photo = Photos.query.filter(and_(Photos.photo_category.like("%" + search_form.search_query.data + "%"), Photos.user_id==current_user.id)).all()
             get_photo(photo, list)
-    image = url_for('static', filename='profile pictures/' + current_user.profile_picture)
+    image = url_for('static', filename='profile_pictures/' + current_user.profile_picture)
     return render_template('account.html', title='Edit Account', image=image, form=form, photo=list, enumerate=enumerate, search_form=search_form)
 
 @users.route('/reset_password', methods=['GET', 'POST'])
