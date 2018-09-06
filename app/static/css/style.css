@@ -1,5 +1,7 @@
+@import url("http://fonts.googleapis.com/css?family=Amatic+SC");
+
 body {
-    font-family: 'Amatic SC', cursive;
+    font-family: "Amatic SC", cursive;
     font-weight: 700;
     padding-top: 6rem;
 }
