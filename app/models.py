@@ -56,3 +56,13 @@ class Photos(db.Model):
 
     def __repr__(self):
         return f"Photos('{self.photo_name}','{self.photo_category}','{self.photo_link}')"
+
+class Pages(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    page_name = db.Column(db.String(20), unique=True, nullable=False)
+    page_category = db.Column(db.String(20), nullable=False)
+
+class Page_Images(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    image_category = db.Column(db.String(20), nullable=False)
+    

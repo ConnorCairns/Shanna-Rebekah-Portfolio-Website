@@ -2,7 +2,7 @@
 <div class="container-fluid">
     <div class="row text-center regular-width align-items-center mb-4">
         <div class="col-md-6">
-            <h1 id="1" class="display-5">Disguise</h1>
+            <h1 id="header1" class="display-5">Disguise</h1>
             <hr class="mt-1 mb-4">
             <p class="font-weight-normal text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam porta convallis arcu quis aliquam. Proin lacus magna,
                 laoreet in elit rutrum, aliquet dignissim ligula. Vivamus at neque mollis, lacinia nunc nec, porttitor neque. Quisque
@@ -19,7 +19,7 @@
     </div>
     <div class="row text-center regular-width align-items-center mb-4">
         <div class="col-md-6 order-lg-last">
-            <h1 id="2" class="display-5">Something</h1>
+            <h1 id="header2" class="display-5">Something</h1>
             <hr class="mt-1 mb-4">
             <p class="font-weight-normal text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam porta convallis arcu quis aliquam. Proin lacus magna,
                 laoreet in elit rutrum, aliquet dignissim ligula. Vivamus at neque mollis, lacinia nunc nec, porttitor neque. Quisque
@@ -36,7 +36,7 @@
     </div>
     <div class="row text-center regular-width align-items-center mb-4">
         <div class="col-md-6">
-            <h1 id="3" class="display-5">Something Else</h1>
+            <h1 id="header3" class="display-5">Something Else</h1>
             <hr class="mt-1 mb-4">
             <p class="font-weight-normal text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam porta convallis arcu quis aliquam. Proin lacus magna,
                 laoreet in elit rutrum, aliquet dignissim ligula. Vivamus at neque mollis, lacinia nunc nec, porttitor neque. Quisque
@@ -53,7 +53,7 @@
     </div>
     <div class="row text-center regular-width align-items-center mb-4">
         <div class="col-md-6 order-lg-last">
-            <h1 id="4" class="display-5">Frustration</h1>
+            <h1 id="header4" class="display-5">Frustration</h1>
             <hr class="mt-1 mb-4">
             <p class="font-weight-normal text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam porta convallis arcu quis aliquam. Proin lacus magna,
                 laoreet in elit rutrum, aliquet dignissim ligula. Vivamus at neque mollis, lacinia nunc nec, porttitor neque. Quisque
@@ -70,7 +70,7 @@
     </div>
     <div class="row text-center regular-width align-items-center mb-4">
         <div class="col-md-6">
-            <h1 id="5" class="display-5">Golden Lines</h1>
+            <h1 id="header5" class="display-5">Golden Lines</h1>
             <hr class="mt-1 mb-4">
             <p class="font-weight-normal text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam porta convallis arcu quis aliquam. Proin lacus magna,
                 laoreet in elit rutrum, aliquet dignissim ligula. Vivamus at neque mollis, lacinia nunc nec, porttitor neque. Quisque
@@ -87,7 +87,7 @@
     </div>
     <div class="row text-center regular-width align-items-center mb-4">
         <div class="col-md-6 order-lg-last">
-            <h1 id="6" class="display-5">Innocence</h1>
+            <h1 id="header6" class="display-5">Innocence</h1>
             <hr class="mt-1 mb-4">
             <p class="font-weight-normal text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam porta convallis arcu quis aliquam. Proin lacus magna,
                 laoreet in elit rutrum, aliquet dignissim ligula. Vivamus at neque mollis, lacinia nunc nec, porttitor neque. Quisque
@@ -104,7 +104,7 @@
     </div>
     <div class="row text-center regular-width align-items-center mb-4">
         <div class="col-md-6">
-            <h1 id="7" class="display-5">Something Else</h1>
+            <h1 id="header7" class="display-5">Something Else</h1>
             <hr class="mt-1 mb-4">
             <p class="font-weight-normal text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam porta convallis arcu quis aliquam. Proin lacus magna,
                 laoreet in elit rutrum, aliquet dignissim ligula. Vivamus at neque mollis, lacinia nunc nec, porttitor neque. Quisque
@@ -113,17 +113,17 @@
             <a id="7" class="btn btn-md btn-outline-secondary float-right mb-2" href="#">View more</a>
         </div>
         <div class="col-md-3">
-            <img src="{{url_for('static',filename='Portraits/New folder (3)/1.JPG')}}" class="img-fluid rounded hoverable mb-3" alt="Responsive image">
+            <img src="{{url_for('static',filename='Portraits/New_folder(3)/1.JPG')}}" class="img-fluid rounded hoverable mb-3" alt="Responsive image">
         </div>
         <div class="col-md-3">
-            <img src="{{url_for('static',filename='Portraits/New folder (3)/2.JPG')}}" class="img-fluid rounded hoverable mb-3" alt="Responsive image">
+            <img src="{{url_for('static',filename='Portraits/New_folder(3)/2.JPG')}}" class="img-fluid rounded hoverable mb-3" alt="Responsive image">
         </div>
     </div>
 
 <script type="text/javascript">
-    $(document).on('click', '.btn', function(e){
+    $(document).on('click', '.btn', (e) => {
         var count = e.target.id;
-        var header = $('.display-5 #'+count).html();
+        var header = $('#header'+count).html();
         alert(header);
     });
 </script>
