@@ -1,6 +1,12 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from app.main.forms import contact_form
 from app.main.utils import send_email
+from app import db
+from app.models import PageImages, Pages, User
+from app.main.forms import Add_Photoshoot_Photo, New_photoshoot
+from app.pictures.utils import s3_upload, save_pic, del_pic
+from flask_login import login_required
+
 
 main = Blueprint('main', __name__)
 
@@ -12,6 +18,37 @@ def index():
 @main.route('/about/')
 def about():
     return render_template('about.html')
+
+@main.route('/new_photoshoot/', methods=['GET','POST'])
+@login_required
+@User.must_be_role("Admin")
+def new_photoshoot():
+    form = New_photoshoot()
+    if form.validate_on_submit():
+        photoshoot = Pages(page_name=form.name.data, page_category=form.category.data, page_text=form.text.data)
+        db.session.add(photoshoot)
+        db.session.commit()
+        flash('Photoshoot added, please now add an image', 'info')
+        return redirect(url_for('main.new_picture'))
+    return render_template('new_photoshoot.html', form=form)
+
+@main.route('/new_photoshoot/picture/', methods=['GET','POST'])
+@login_required
+@User.must_be_role("Admin")
+def new_picture():
+    form = Add_Photoshoot_Photo()
+    if form.validate_on_submit():
+        page = Pages.query.filter_by(page_name=form.page.data).first_or_404()
+        photo = PageImages(image_name=(form.name.data).lower(), page=page)
+        db.session.add(photo)
+        db.session.commit()
+        save_pic(form.picture.data, form.name.data)
+        s3_upload(form.name.data)
+        del_pic(form.name.data)
+        flash('Image information added', 'info')
+        return redirect(url_for('main.new_picture'))
+    return render_template('new_picture.html', form=form)
+
 
 @main.route('/contact/', methods=['GET','POST'])
 def contact():
@@ -27,21 +64,22 @@ def contact():
 def portraits():
     return render_template('portraits/portraits.html')
 
-@main.route('/portraits/disguise')
-def portraits_disguise():
-    return render_template('portraits/disguise.html')
-
-@main.route('/portraits/something')
-def portraits_something():
-    return render_template('portraits/something.html')
-
-@main.route('/portraits/somethingelse')
-def portraits_somethingelse():
-    return render_template('portraits/somethingelse.html')
-
-@main.route('/portraits/frustration')
-def portraits_frustration():
-    return render_template('portraits/frustration.html')
+@main.route('/portraits/<photoshoot>')
+def portraits_photoshoot(photoshoot):
+    page = Pages.query.filter_by(page_name=photoshoot).first_or_404()
+    return render_template('portraits/photoshoot.html', page=page)
+    
+#@main.route('/portraits/something')
+#def portraits_something():
+#    return render_template('portraits/something.html')
+#
+#@main.route('/portraits/somethingelse')
+#def portraits_somethingelse():
+#    return render_template('portraits/somethingelse.html')
+#
+#@main.route('/portraits/frustration')
+#def portraits_frustration():
+#    return render_template('portraits/frustration.html')
 
 @main.route('/wedding/')
 def wedding():

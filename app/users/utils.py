@@ -10,7 +10,7 @@ def update_profile_picture(picture):
     name = secrets.token_hex(8)
     _, ext = os.path.splitext(picture.filename)
     profile_picture_name = name + ext
-    path = os.path.join(current_app.root_path, 'static', 'profile pictures' , profile_picture_name)
+    path = os.path.join(current_app.root_path, 'static', 'profile_pictures' , profile_picture_name)
     size = (125, 125)
     image = Image.open(picture)
     image.thumbnail(size)

@@ -114,9 +114,3 @@ def edit():
         form.email.data = current_user.email
     image = url_for('static', filename='profile pictures/' + current_user.profile_picture)
     return render_template('account/edit.html', title='Edit Account', image=image, form=form)
-
-
-#@users.route('/download')
-#def download(jsdata):
-#    data = jsdata
-#    return render_template('download.html', data=data)

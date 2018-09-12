@@ -1,0 +1,11 @@
+{% extends 'layout.html' %} {% block body %}
+<div class="container-fluid">
+    <div class="row text-center regular-width align-items-center mb-4">
+        <div class="col-12">
+            <h1 class="display-5">{{ page.page_name }}</h1>
+            <hr class="mt-1 mb-3">
+            <p class="font-weight-normal text-justify">worked</p>
+            <a class="btn btn-md btn-outline-secondary float-right" href="{{ url_for('main.portraits') }}">Go Back</a>        
+        </div>
+    </div>
+{% endblock %}
