@@ -66,6 +66,6 @@ class Pages(db.Model):
 
 class PageImages(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    image_name = db.Column(db.String(20), unique=True, nullable=False)
+    photo_name = db.Column(db.String(20), unique=True, nullable=False)
     page_id = db.Column(db.Integer, db.ForeignKey('pages.id'), nullable=False)
     

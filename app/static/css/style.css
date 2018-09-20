@@ -108,4 +108,9 @@ p {
     body {
         padding-top: 5rem;
     }
+
+    .small-width {
+        width: 100%;
+    }
 }
+              

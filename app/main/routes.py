@@ -5,6 +5,7 @@ from app import db
 from app.models import PageImages, Pages, User
 from app.main.forms import Add_Photoshoot_Photo, New_photoshoot
 from app.pictures.utils import s3_upload, save_pic, del_pic
+from app.users.utils import get_photo
 from flask_login import login_required
 
 
@@ -25,7 +26,7 @@ def about():
 def new_photoshoot():
     form = New_photoshoot()
     if form.validate_on_submit():
-        photoshoot = Pages(page_name=form.name.data, page_category=form.category.data, page_text=form.text.data)
+        photoshoot = Pages(page_name=(form.name.data).lower(), page_category=form.category.data, page_text=form.text.data)
         db.session.add(photoshoot)
         db.session.commit()
         flash('Photoshoot added, please now add an image', 'info')
@@ -38,8 +39,8 @@ def new_photoshoot():
 def new_picture():
     form = Add_Photoshoot_Photo()
     if form.validate_on_submit():
-        page = Pages.query.filter_by(page_name=form.page.data).first_or_404()
-        photo = PageImages(image_name=(form.name.data).lower(), page=page)
+        page = Pages.query.filter_by(page_name=str(form.page.data).lower()).first_or_404()
+        photo = PageImages(photo_name=(form.name.data).lower(), page=page)
         db.session.add(photo)
         db.session.commit()
         save_pic(form.picture.data, form.name.data)
@@ -67,19 +68,10 @@ def portraits():
 @main.route('/portraits/<photoshoot>')
 def portraits_photoshoot(photoshoot):
     page = Pages.query.filter_by(page_name=photoshoot).first_or_404()
-    return render_template('portraits/photoshoot.html', page=page)
-    
-#@main.route('/portraits/something')
-#def portraits_something():
-#    return render_template('portraits/something.html')
-#
-#@main.route('/portraits/somethingelse')
-#def portraits_somethingelse():
-#    return render_template('portraits/somethingelse.html')
-#
-#@main.route('/portraits/frustration')
-#def portraits_frustration():
-#    return render_template('portraits/frustration.html')
+    photo = PageImages.query.filter_by(page_id=page.id).all()
+    list = []
+    get_photo(photo, list)
+    return render_template('portraits/photoshoot.html', page=page, photo=list, enumerate=enumerate)
 
 @main.route('/wedding/')
 def wedding():

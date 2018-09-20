@@ -4,8 +4,19 @@
         <div class="col-12">
             <h1 class="display-5">{{ page.page_name }}</h1>
             <hr class="mt-1 mb-3">
-            <p class="font-weight-normal text-justify">worked</p>
-            <a class="btn btn-md btn-outline-secondary float-right" href="{{ url_for('main.portraits') }}">Go Back</a>        
+            <p class="font-weight-normal text-justify">{{ page.page_text }}</p>
+            <a class="btn btn-md btn-outline-secondary float-right mb-2" href="{{ url_for('main.portraits') }}">Go Back</a> 
+            <div class="container-fluid pt-4">
+                <div class="row">
+                    {% for count, img in enumerate(photo) %} {% if count % 4 == 0 %}
+                    <div class="w-100"></div>
+                    {% endif %}
+                    <div class="col-sm mb-4">
+                        <img src="https://s3.eu-west-2.amazonaws.com/shanna-rebekah-photography/{{ img }}.JPG" alt="Account Picture" class="img-fluid rounded">
+                    </div>
+                    {%endfor%}
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

@@ -30,11 +30,11 @@ class Add_Photoshoot_Photo(FlaskForm):
     submit = SubmitField("Add photo")
 
     def validate_name(self, name):
-        name = PageImages.query.filter_by(image_name=str(name.data).lower()).first()
+        name = PageImages.query.filter_by(photo_name=str(name.data).lower()).first()
         if name:
             raise ValidationError('A photo already exists with that name')
 
-    def validate_page(self, page):
-        page = Pages.query.filter_by(page_name=(page.data).lower()).first()
-        if page is None:
-            raise ValidationError('No page exists with that name')
+   # def validate_page(self, page):
+   #     page = Pages.query.filter_by(page_name=(page.data).lower()).first()
+   #     if page is None:
+   #         raise ValidationError('No page exists with that name')
