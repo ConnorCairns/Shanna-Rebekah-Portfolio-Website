@@ -11,7 +11,7 @@ s3 = client.resource('s3')
 
 def s3_upload(name):
     name = name.lower()
-    path = "app/static/temp/" + name + ".JPG"
+    path = f"app/static/temp/{name}.JPG"
     image = open(path, 'rb')
     s3.Bucket('shanna-rebekah-photography').put_object(Key=f'{name}.JPG', ContentType='image/png',Body=image)
 
@@ -25,7 +25,7 @@ def save_pic(picture, name):
 
 def del_pic(name):
     name = name.lower()
-    path = "app/static/temp/" + name + ".JPG"
+    path = f"app/static/temp/{name}.JPG"
     os.remove(path)
 
 def s3_download(data):

@@ -11,7 +11,7 @@
             <button id="1" class="btn btn-md btn-outline-secondary float-right mb-2" onclick="buttonClick(event)">View more</button>
         </div>
         <div class="col-md-3">
-            <img src="{{url_for('static',filename='Portraits/1Disguise/jade1.JPG')}}" class="img-fluid rounded hoverable mb-3" alt="Responsive image">
+            <img src="{{url_for('static',filename='Portraits/1Disguise/jade1-small.JPG')}}" srcset="{{url_for('static',filename='Portraits/1Disguise/jade1-medium.JPG')}} 1000w, {{url_for('static',filename='Portraits/1Disguise/jade1-large.JPG')}} 1500w" class="img-fluid rounded hoverable mb-3" alt="Responsive image">
         </div>
         <div class="col-md-3">
             <img src="{{url_for('static',filename='Portraits/1Disguise/jade2.JPG')}}" class="img-fluid rounded hoverable mb-3" alt="Responsive image">

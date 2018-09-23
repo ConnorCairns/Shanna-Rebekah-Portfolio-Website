@@ -38,8 +38,7 @@ class User(db.Model, UserMixin):
                 if current_user.role != role:
                     return abort(403)
                 else:
-                    return func(*args, **kwargs)
-                    
+                    return func(*args, **kwargs)      
             return role_checker
         return must_be_role_decorator
 
