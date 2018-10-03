@@ -1,4 +1,4 @@
-import boto3, os, time
+import boto3, os, time, shutil
 from PIL import Image
 from flask import current_app, url_for
 
@@ -29,11 +29,17 @@ def del_pic(name):
     os.remove(path)
 
 def s3_download(data):
+    s3_delete()
     ndata = data+'.JPG'
     path = os.path.join(current_app.root_path, 'static', 'temp' , ndata)
     s3.Bucket('shanna-rebekah-photography').download_file(ndata, path)
-    #s3_temp_delete(path)
 
-#def s3_temp_delete(path):
-#    time.sleep(5)
-#    os.remove(path)
+def s3_delete():
+    path = 'app/static/temp'
+    for f in os.listdir(path):
+        file_path = os.path.join(path, f)
+        try:
+            if os.path.isfile(file_path):
+                os.unlink(file_path)
+        except Exception as e:
+            print(e)

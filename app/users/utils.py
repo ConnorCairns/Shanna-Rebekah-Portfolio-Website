@@ -19,7 +19,7 @@ def update_profile_picture(picture):
 
 def send_reset_email(user):
     token = user.reset_token()
-    msg = Message('Password Reset Request', sender='Shanna Rebekah Photography', recipients=[user.email])
+    msg = Message('Password Reset Request', sender=("Shanna Rebekah Photography", "shannarebekahphotography@gmail.com"), recipients=[user.email])
     msg.html = render_template("emails/password_reset.html", token=token )
     mail.send(msg)
 

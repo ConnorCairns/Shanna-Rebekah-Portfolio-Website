@@ -21,16 +21,18 @@
 </head>
 
 <body>
-  {% include 'includes/navbar.html' %}
-    {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-        {% for category, message in messages %}
-          <div class="alert alert-{{ category }}">
-            {{ message }}
-        {% endfor %}
-      {% endif %}
-    {%  endwith %}
-  </div>
+  <div class="container-fluid">
+    {% include 'includes/navbar.html' %}
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+              {{ message }}
+          {% endfor %}
+        {% endif %}
+      {%  endwith %}
+      </div>
+    </div>
     {% block body%}{% endblock%}
 
   {% if request.path == '/login' or request.path == '/register' or request.path == '/account' %}

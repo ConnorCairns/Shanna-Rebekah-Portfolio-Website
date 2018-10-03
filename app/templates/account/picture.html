@@ -16,10 +16,9 @@
 
 <script type="text/javascript">
 $(document).on('click', '.download', function(e){
-    download({{data}}+".JPG")
+    download("{{data}}.JPG")
 });
 
-    
 function download(name) {
     var a = $('<a>')
         .attr('href', "/static/temp/"+name)
