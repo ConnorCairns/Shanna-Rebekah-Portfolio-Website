@@ -13,6 +13,7 @@
             <a class="btn btn-md btn-outline-secondary" href="{{ url_for('users.edit') }}">Edit information</a>
         </div>
     </div>
+    {% if current_user.role == "Client" %}
     <div>
         <form method="POST" action="">
             {{ form.hidden_tag() }}
@@ -34,7 +35,39 @@
             </fieldset>
         </form>
     </div>
+    {% endif %}
     <div class="container-fluid pt-4">
+        {% if current_user.role == "Admin" %}
+        <div>
+            <form method="POST" action="">
+                {{ form.hidden_tag() }}
+                <fieldset class="form-group">
+                    <hr class=my-4>
+                    <div class="form-group">
+                        {{ todo_form.todo.label(class="form-control-label") }}
+                        {% if todo_form.todo.errors %}
+                            {{ todo_form.todo(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in todo_form.todo.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ todo_form.todo(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+        <div>
+            {% for todo in todos %}
+            <div>
+                <p>{{todo}}</p>
+                <a class="btn btn-md btn-outline-secondary float-right" href="{{ url_for('users.edit') }}">Done</a>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
         <div class="row">
             {% for count, img in enumerate(photo) %} {% if count % 4 == 0 %}
             <div class="w-100"></div>
@@ -46,6 +79,7 @@
             </div>
             {%endfor%}
         </div>
+        {% endif %}
     </div>
 
 {% endblock %}

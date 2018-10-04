@@ -67,4 +67,9 @@ class PageImages(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     photo_name = db.Column(db.String(20), unique=True, nullable=False)
     page_id = db.Column(db.Integer, db.ForeignKey('pages.id'), nullable=False)
+
+class Todo(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    todo = db.Column(db.String(100), nullable=False)
+    done = db.Column(db.Boolean, default=False)
     

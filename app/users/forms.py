@@ -63,4 +63,7 @@ class reset_pass(FlaskForm):
 class search(FlaskForm):
     search_query = StringField("Search")
 
+class todo(FlaskForm):
+    todo = StringField("Todo", validators=[DataRequired()])
+
 

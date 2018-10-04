@@ -1,8 +1,8 @@
 from flask import Blueprint, render_template, url_for, flash, redirect, request
 from flask_login import login_user, current_user, logout_user, login_required
 from app import db, bcrypt
-from app.models import User, Photos
-from app.users.forms import Registration, Login, Edit, email_reset_pass, reset_pass, search
+from app.models import User, Photos, Todo
+from app.users.forms import Registration, Login, Edit, email_reset_pass, reset_pass, search, todo as TodoForm #This has to be imported like this otherwise it doesnt work and i have no idea why
 from app.users.utils import update_profile_picture, send_reset_email, get_photo
 from wtforms.validators import ValidationError
 from sqlalchemy import and_, or_
@@ -53,6 +53,14 @@ def account():
     get_photo(photo, list)
     form = Edit()
     search_form = search()
+    todo_form = TodoForm()
+    todos_object = Todo.query.filter_by(done=False).all()
+    todos = []
+    print(todos_object)
+    for i, todo in enumerate(todos_object):
+        temp = todos_object[i].todo
+        todos.append(temp)
+        print(todos)
     if request.method == 'GET':
         form.username.data = current_user.username
         form.email.data = current_user.email
@@ -64,8 +72,17 @@ def account():
         else:
             photo = Photos.query.filter(and_(Photos.photo_category.like("%" + search_form.search_query.data + "%"), Photos.user_id==current_user.id)).all()
             get_photo(photo, list)
+    if todo_form.validate_on_submit():
+        todo = Todo(todo=todo_form.todo.data)
+        db.session.add(todo)
+        db.session.commit()
+        return redirect(url_for('users.account'))
     image = url_for('static', filename='profile_pictures/' + current_user.profile_picture)
-    return render_template('account/account.html', title='Edit Account', image=image, form=form, photo=list, enumerate=enumerate, search_form=search_form)
+    return render_template('account/account.html', title='Edit Account', image=image, form=form, photo=list, enumerate=enumerate, search_form=search_form, todo_form=todo_form, todos=todos)
+
+@users.route('/account/done/<id>', methods=['GET', 'POST'])
+def todo_done(id):
+    
 
 @users.route('/reset_password', methods=['GET', 'POST'])
 def request_reset_email():
