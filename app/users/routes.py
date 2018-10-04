@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, url_for, flash, redirect, request
 from flask_login import login_user, current_user, logout_user, login_required
 from app import db, bcrypt
-from app.models import User, Photos, Todo
+from app.models import User, Photos, Todo_table
 from app.users.forms import Registration, Login, Edit, email_reset_pass, reset_pass, search, todo as TodoForm #This has to be imported like this otherwise it doesnt work and i have no idea why
 from app.users.utils import update_profile_picture, send_reset_email, get_photo
 from wtforms.validators import ValidationError
@@ -54,13 +54,14 @@ def account():
     form = Edit()
     search_form = search()
     todo_form = TodoForm()
-    todos_object = Todo.query.filter_by(done=False).all()
+    todos_object = Todo_table.query.filter_by(done=False).all()
     todos = []
-    print(todos_object)
-    for i, todo in enumerate(todos_object):
+    ids = []
+    for i, todo in enumerate(todos_object): #MOVE THIS INTO UTILS
         temp = todos_object[i].todo
         todos.append(temp)
-        print(todos)
+        temp = todos_object[i].id
+        ids.append(temp)
     if request.method == 'GET':
         form.username.data = current_user.username
         form.email.data = current_user.email
@@ -73,16 +74,19 @@ def account():
             photo = Photos.query.filter(and_(Photos.photo_category.like("%" + search_form.search_query.data + "%"), Photos.user_id==current_user.id)).all()
             get_photo(photo, list)
     if todo_form.validate_on_submit():
-        todo = Todo(todo=todo_form.todo.data)
+        todo = Todo_table(todo=todo_form.todo.data)
         db.session.add(todo)
         db.session.commit()
         return redirect(url_for('users.account'))
     image = url_for('static', filename='profile_pictures/' + current_user.profile_picture)
-    return render_template('account/account.html', title='Edit Account', image=image, form=form, photo=list, enumerate=enumerate, search_form=search_form, todo_form=todo_form, todos=todos)
+    return render_template('account/account.html', title='Edit Account', image=image, form=form, photo=list, enumerate=enumerate, search_form=search_form, todo_form=todo_form, todos=todos, ids=ids)
 
-@users.route('/account/done/<id>', methods=['GET', 'POST'])
-def todo_done(id):
-    
+@users.route('/account/done/<todo_id>', methods=['GET', 'POST'])
+def todo_done(todo_id):
+    todo = Todo_table.query.filter_by(id=todo_id).first()
+    todo.done = True
+    db.session.commit()
+    return redirect(url_for('users.account'))
 
 @users.route('/reset_password', methods=['GET', 'POST'])
 def request_reset_email():

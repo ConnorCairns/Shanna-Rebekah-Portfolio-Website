@@ -8,9 +8,6 @@
             <a class="btn btn-md btn-outline-secondary float-right mb-2" href="{{ url_for('main.portraits') }}">Go Back</a>
         </div>
     </div> 
-</div>
-<div class="container-fluid">
-    <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
     <div class="row">
         {% for count, img in enumerate(photo) %} {% if count % 4 == 0 %}
         <div class="w-100"></div>
@@ -20,5 +17,5 @@
         </div>
         {%endfor%}
     </div>
-</div>
+
 {% endblock %}

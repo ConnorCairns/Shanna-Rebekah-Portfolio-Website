@@ -64,6 +64,6 @@ class search(FlaskForm):
     search_query = StringField("Search")
 
 class todo(FlaskForm):
-    todo = StringField("Todo", validators=[DataRequired()])
+    todo = StringField("Add a Todo", validators=[DataRequired()])
 
 

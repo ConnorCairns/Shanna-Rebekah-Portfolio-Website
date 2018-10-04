@@ -126,7 +126,6 @@
         var count = e.target.id;
         var header = $('#header'+count).html();
         let url = (`/portraits/${header}`).toLowerCase();
-        console.log(url)
         window.location.href = url;
         // e.preventDefault();  //This is needed so the page does not reload and doesnt re-direct, idk why though
     };
