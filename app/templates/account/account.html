@@ -5,10 +5,12 @@
         <div class="media-body">
             <a class="btn btn-md btn-outline-danger float-right" href="{{ url_for('users.logout') }}">Log out</a>
             {% if current_user.role == "Admin" %}
-            <a class="btn btn-md btn-outline-secondary float-lg-right mr-2 hide" href="{{ url_for('pictures.new_photo') }}">Add
+            <a class="btn btn-md btn-outline-secondary float-lg-right mr-2 hide" href="{{ url_for('pictures.new_photo') }}">Add Client
                 Photo</a>
             <a class="btn btn-md btn-outline-secondary float-lg-right mr-2 hide" href="{{ url_for('main.new_photoshoot') }}">Add
                 Photoshoot</a>
+            <a class="btn btn-md btn-outline-secondary float-lg-right mr-2 hide" href="{{ url_for('main.new_picture') }}">Add
+                Photoshoot Photo</a>
             {% endif %}
             <h2 id="jstest">{{ current_user.username }}</h2>
             <p class="text-secondary">{{ current_user.email }}</p>
@@ -36,7 +38,7 @@
         </form>
     </div>
     {% endif %} {% if current_user.role == "Admin" %}
-    <div class="todo s-width">
+    <div class="todo">
         <form method="POST" action="">
             {{ form.hidden_tag() }}
             <fieldset class="form-group">
@@ -52,22 +54,24 @@
                 </div>
             </fieldset>
         </form>
+        <table class="table table-hover bigger-text">
+            <thead>
+                <tr class="bg-secondary">
+                    <th scope="col">#</th>
+                    <th scope="col">Todo</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
         {% for i, todo in enumerate(todos) %}
-        <div class="row width-90">
-            <div class="col-10">
-                <div class="float-left mr-2 mt-1">
-                    <i class="far fa-circle"></i>
-                </div>
-                <p>{{todo}}</p>
-            </div>
-            <div class="col-2">
-                <button id={{ids[i]}} class="btn btn-md btn-outline-secondary float-right" onclick="buttonClick(event)">Done</button>
-            </div>
-            <div class="col-12">
-                <hr class=mt-0>
-            </div>
-        </div>
+                <tr>
+                    <th scope="row">{{ i+1 }}</th>
+                    <td>{{ todo }}</td>
+                    <td><button id={{ids[i]}} class="btn btn-md btn-outline-secondary float-right" onclick="buttonClick(event)">Done</button></td>
+                </tr>        
         {% endfor %} {% else %}
+            </tbody>
+        </table>
         <div class="row">
             {% for count, img in enumerate(photo) %} {% if count % 4 == 0 %}
             <div class="w-100"></div>
@@ -89,3 +93,20 @@
             window.location.href = url;
         };
     </script> {% endblock %}
+
+<!--
+            <div class="row">
+            <div class="col-10">
+                <div class="float-left mr-2 mt-1">
+                    <i class="far fa-circle"></i>
+                </div>
+                <p>{{todo}}</p>
+            </div>
+            <div class="col-2">
+                <button id={{ids[i]}} class="btn btn-md btn-outline-secondary float-right" onclick="buttonClick(event)">Done</button>
+            </div>
+            <div class="col-12">
+                <hr class=mt-0>
+            </div>
+        </div>
+-->

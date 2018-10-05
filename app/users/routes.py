@@ -3,7 +3,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 from app import db, bcrypt
 from app.models import User, Photos, Todo_table
 from app.users.forms import Registration, Login, Edit, email_reset_pass, reset_pass, search, todo as TodoForm #This has to be imported like this otherwise it doesnt work and i have no idea why
-from app.users.utils import update_profile_picture, send_reset_email, get_photo
+from app.users.utils import update_profile_picture, send_reset_email, get_photo, get_todo
 from wtforms.validators import ValidationError
 from sqlalchemy import and_, or_
 
@@ -57,11 +57,7 @@ def account():
     todos_object = Todo_table.query.filter_by(done=False).all()
     todos = []
     ids = []
-    for i, todo in enumerate(todos_object): #MOVE THIS INTO UTILS
-        temp = todos_object[i].todo
-        todos.append(temp)
-        temp = todos_object[i].id
-        ids.append(temp)
+    get_todo(todos_object, todos, ids)
     if request.method == 'GET':
         form.username.data = current_user.username
         form.email.data = current_user.email
