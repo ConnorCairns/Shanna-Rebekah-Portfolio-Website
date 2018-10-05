@@ -24,15 +24,15 @@ def send_reset_email(user):
     mail.send(msg)
 
 def get_photo(photo, list):
-    for i, x in enumerate(photo):
-        temp = photo[i].photo_name
+    for photo in photo:
+        temp = photo.photo_name
         list.append(temp)
     return list
 
 def get_todo(todos_object, todos, ids):
-    for i, todo in enumerate(todos_object):
-        temp = todos_object[i].todo
+    for todo in todos_object:
+        temp = todo.todo
         todos.append(temp)
-        temp = todos_object[i].id
+        temp = todo.id
         ids.append(temp)
     return todos, ids
