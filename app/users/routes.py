@@ -49,8 +49,8 @@ def logout():
 @login_required
 def account():
     photo = Photos.query.filter_by(user_id=current_user.id).all()
-    list = []
-    get_photo(photo, list)
+    photo_list = []
+    get_photo(photo, photo_list)
     form = Edit()
     search_form = search()
     todo_form = TodoForm()
@@ -62,24 +62,26 @@ def account():
         form.username.data = current_user.username
         form.email.data = current_user.email
     if search_form.validate_on_submit():
-        list = [] #needs to be here otherwise original photos stay on the page
+        photo_list = [] #needs to be here otherwise original photos stay on the page
         photo = Photos.query.filter(and_(Photos.photo_name.like("%" + search_form.search_query.data + "%"), Photos.user_id==current_user.id)).all()
         if photo:
-            get_photo(photo, list)
+            get_photo(photo, photo_list)
         else:
             photo = Photos.query.filter(and_(Photos.photo_category.like("%" + search_form.search_query.data + "%"), Photos.user_id==current_user.id)).all()
-            get_photo(photo, list)
+            get_photo(photo, photo_list)
     if todo_form.validate_on_submit():
         todo = Todo_table(todo=todo_form.todo.data)
         db.session.add(todo)
         db.session.commit()
         return redirect(url_for('users.account'))
     image = url_for('static', filename='profile_pictures/' + current_user.profile_picture)
-    return render_template('account/account.html', title='Edit Account', image=image, form=form, photo=list, enumerate=enumerate, search_form=search_form, todo_form=todo_form, todos=todos, ids=ids)
+    return render_template('account/account.html', title='Edit Account', image=image, form=form, photo=photo_list, enumerate=enumerate, search_form=search_form, todo_form=todo_form, todos=todos, ids=ids)
 
 @users.route('/account/done/<todo_id>', methods=['GET', 'POST'])
+@login_required
+@User.must_be_role("Admin")
 def todo_done(todo_id):
-    todo = Todo_table.query.filter_by(id=todo_id).first()
+    todo = Todo_table.query.filter_by(id=todo_id).first_or_404()
     todo.done = True
     db.session.commit()
     return redirect(url_for('users.account'))

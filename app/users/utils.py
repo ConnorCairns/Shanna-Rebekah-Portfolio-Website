@@ -23,11 +23,11 @@ def send_reset_email(user):
     msg.html = render_template("emails/password_reset.html", token=token )
     mail.send(msg)
 
-def get_photo(photo, list):
+def get_photo(photo, photo_list):
     for photo in photo:
         temp = photo.photo_name
-        list.append(temp)
-    return list
+        photo_list.append(temp)
+    return photo_list
 
 def get_todo(todos_object, todos, ids):
     for todo in todos_object:

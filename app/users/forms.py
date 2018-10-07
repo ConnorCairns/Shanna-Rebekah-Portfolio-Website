@@ -36,7 +36,7 @@ class Edit(FlaskForm):
 
     def validate_username(self, username):
         if username.data != current_user.username:
-            user = User.query.filter_by(username=username.data).first()
+            user = User.query.filter_by(username=(username.data).lower()).first()
             if user:
                 raise ValidationError('Username taken')
     
