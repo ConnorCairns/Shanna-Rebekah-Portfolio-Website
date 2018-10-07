@@ -74,13 +74,14 @@
                 {% endfor %} {% else %}
             </tbody>
         </table>
+        <div id="spinnerdiv" class="row spinner mb-4" style="position:relative;"></div>
         <div class="row">
             {% for count, img in enumerate(photo) %} {% if count % 4 == 0 %}
             <div class="w-100"></div>
             {% endif %}
             <div class="col-sm mb-4">
                 <a href="{{ url_for('pictures.get_js_data', jsdata=img) }}">
-                    <img src="https://s3.eu-west-2.amazonaws.com/shanna-rebekah-photography/{{ img }}.JPG" alt="Account Picture"
+                    <img onload="spinner()" src="https://s3.eu-west-2.amazonaws.com/shanna-rebekah-photography/{{ img }}.JPG" alt="Account Picture"
                         class="img-fluid rounded">
                 </a>
             </div>
@@ -95,4 +96,9 @@
             let url = (`/account/done/${count}`).toLowerCase();
             window.location.href = url;
         };
+        
+        function spinner() {
+            $('#spinnerdiv').removeClass('spinner mb-4');
+        };
+        
     </script> {% endblock %}
