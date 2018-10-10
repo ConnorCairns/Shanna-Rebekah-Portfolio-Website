@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from app.main.forms import contact_form
-from app.main.utils import send_email
+from app.main.utils import send_email, get_page_images
 from app import db
 from app.models import PageImages, Pages, User
 from app.main.forms import Add_Photoshoot_Photo, New_photoshoot
@@ -65,10 +65,7 @@ def contact():
 def portraits():
     pages = Pages.query.filter_by(page_category="portraits").all()
     images_array = []
-    for page in pages:
-        images = PageImages.query.filter_by(page_id=page.id).all()
-        images = images[0:2]
-        images_array.append(images)
+    get_page_images(pages, images_array)
     return render_template('portraits/portraits.html', pages=pages, images_array=images_array)
 
 @main.route('/portraits/<photoshoot>')
