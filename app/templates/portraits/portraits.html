@@ -1,5 +1,5 @@
 {% extends 'layout.html' %} {% block body %}
-<div class="container-fluid">
+<!--<div class="container-fluid">
     <div class="row text-center regular-width align-items-center mb-4">
         <div class="col-md-6">
             <h1 id="header1" class="display-5">Disguise</h1>
@@ -118,17 +118,42 @@
         <div class="col-md-3">
             <img src="{{url_for('static',filename='Portraits/New_folder(3)/2.JPG')}}" class="img-fluid rounded hoverable mb-3" alt="Responsive image">
         </div>
-    </div>
+    </div>-->
 
+<div class="container-fluid">
 
-<script type="text/javascript">
-    function buttonClick(e) {
-        var count = e.target.id;
-        var header = $('#header'+count).html();
-        let url = (`/portraits/${header}`).toLowerCase();
-        window.location.href = url;
-        // e.preventDefault();  //This is needed so the page does not reload and doesnt re-direct, idk why though
-    };
-</script>
+    {% for page in pages %}
+    <div class="row text-center regular-width align-items-center mb-4">
+        {% if page.id % 2 == 0 %}
+        <div class="col-md-6">
+            {% else %}
+            <div class="col-md-6 order-lg-last">
+                {% endif %}
+                <h1 id="header1" class="display-5">{{ page.page_name }}</h1>
+                <hr class="mt-1 mb-4">
+                <p class="font-weight-normal text-justify">{{ page.page_text }}</p>
+                <a class="btn btn-md btn-outline-secondary float-right mb-2" href="{{ url_for('main.portraits_photoshoot', photoshoot=page.page_name)}}">View more</a>
+            </div>
+            {% for image in images_array %}
+            {% for i in image %}
+            {% if i.page_id==page.id %}
+            <div class="col-md-3">
+                <img src="https://s3.eu-west-2.amazonaws.com/shanna-rebekah-photography/{{ i.photo_name }}.JPG" class="img-fluid rounded hoverable mb-3"alt="Responsive image">
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endfor %}
+        </div>
+        {% endfor %}
 
-{% endblock %}
+        <script type="text/javascript">
+            function buttonClick(e) {
+                var count = e.target.id;
+                var header = $('#header' + count).html();
+                let url = (`/portraits/${header}`).toLowerCase();
+                window.location.href = url;
+                // e.preventDefault();  //This is needed so the page does not reload and doesnt re-direct, idk why though  onclick="buttonClick(event)"
+            };
+        </script>
+
+        {% endblock %}
