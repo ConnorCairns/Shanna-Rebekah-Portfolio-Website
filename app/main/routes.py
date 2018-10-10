@@ -63,7 +63,13 @@ def contact():
 # portraits
 @main.route('/portraits/')
 def portraits():
-    return render_template('portraits/portraits.html')
+    pages = Pages.query.filter_by(page_category="portraits").all()
+    images_array = []
+    for page in pages:
+        images = PageImages.query.filter_by(page_id=page.id).all()
+        images = images[0:2]
+        images_array.append(images)
+    return render_template('portraits/portraits.html', pages=pages, images_array=images_array)
 
 @main.route('/portraits/<photoshoot>')
 def portraits_photoshoot(photoshoot):
