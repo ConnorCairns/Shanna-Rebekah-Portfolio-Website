@@ -60,6 +60,13 @@ def contact():
         return redirect(url_for('main.index'))
     return render_template('contact.html', form=form)
 
+
+@main.route('/category/<page>')
+def category(page):
+    pages = Pages.query.filter_by(page_category=page).all()
+    images_array = []
+    get_page_images(pages, images_array)
+    return render_template('portraits/portraits.html', pages=pages, images_array=images_array)
 # portraits
 @main.route('/portraits/')
 def portraits():

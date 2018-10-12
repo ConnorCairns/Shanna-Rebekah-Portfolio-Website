@@ -2,7 +2,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm test mb-4">
-            <a href="{{ url_for('main.portraits') }}">
+            <a href="{{ url_for('main.category', page='portraits') }}">
                 <img src="{{url_for('static',filename='Portraits/1Disguise/jade1-small.JPG')}}" srcset="{{url_for('static',filename='Portraits/1Disguise/jade1-small.JPG')}} 600w ,{{url_for('static',filename='Portraits/1Disguise/jade1-medium.JPG')}} 1000w, {{url_for('static',filename='Portraits/1Disguise/jade1-large.JPG')}} 1500w" class="img-fluid rounded hoverable regular-width" alt="Responsive image">
                 <div class="caption rounded bg-secondary px-2">
                     <h1>Portraits</h1>
@@ -10,7 +10,7 @@
             </a>
         </div>
         <div class="col-sm test mb-4">
-            <a href="{{ url_for('main.wedding') }}">
+            <a href="{{ url_for('main.category', page='wedding') }}">
                 <img src="{{url_for('static',filename='Portraits/Golden_Lines/OTHERPHOTO2-small.JPG')}}" srcset="{{url_for('static',filename='Portraits/Golden_Lines/OTHERPHOTO2-small.JPG')}} 600w ,{{url_for('static',filename='Portraits/Golden_Lines/OTHERPHOTO2-medium.JPG')}} 1000w, {{url_for('static',filename='Portraits/Golden_Lines/OTHERPHOTO2-large.JPG')}} 1500w" class="img-fluid rounded hoverable regular-width" alt="Responsive image">
                 <div class="caption rounded bg-secondary px-2">
                     <h1>Wedding</h1>

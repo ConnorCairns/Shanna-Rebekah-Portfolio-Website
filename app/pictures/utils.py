@@ -1,6 +1,6 @@
-import boto3, os, time, shutil
+import boto3, os, time, shutil, botocore
 from PIL import Image
-from flask import current_app, url_for
+from flask import current_app, url_for, redirect
 
 #S3 Stuff
 client = boto3.Session(
@@ -32,7 +32,13 @@ def s3_download(data):
     s3_delete()
     ndata = data+'.JPG'
     path = os.path.join(current_app.root_path, 'static', 'temp' , ndata)
-    s3.Bucket('shanna-rebekah-photography').download_file(ndata, path)
+    try:
+        s3.Bucket('shanna-rebekah-photography').download_file(ndata, path)
+    except botocore.exceptions.ClientError as e:
+        if e.response['Error']['Code'] == "404":
+            return redirect(url_for('errors/error_404.html'))
+        else:
+            return redirect(url_for('errors/error_500.html'))
 
 def s3_delete():
     path = 'app/static/temp'
