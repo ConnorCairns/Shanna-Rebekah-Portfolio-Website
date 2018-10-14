@@ -39,7 +39,8 @@ def new_photoshoot():
 def new_picture():
     form = Add_Photoshoot_Photo()
     if form.validate_on_submit():
-        page = Pages.query.filter_by(page_name=str(form.page.data).lower()).first_or_404()
+        print(form.picture.data)
+        page = Pages.query.filter_by(page_name=str(form.page.data).lower()).first()
         photo = PageImages(photo_name=(form.name.data).lower(), page=page)
         db.session.add(photo)
         db.session.commit()
@@ -66,22 +67,15 @@ def category(page):
     pages = Pages.query.filter_by(page_category=page).all()
     images_array = []
     get_page_images(pages, images_array)
-    return render_template('portraits/portraits.html', pages=pages, images_array=images_array)
-# portraits
-@main.route('/portraits/')
-def portraits():
-    pages = Pages.query.filter_by(page_category="portraits").all()
-    images_array = []
-    get_page_images(pages, images_array)
-    return render_template('portraits/portraits.html', pages=pages, images_array=images_array)
+    return render_template('photoshoots/category.html', pages=pages, images_array=images_array)
 
-@main.route('/portraits/<photoshoot>')
+@main.route('/photoshoot/<photoshoot>')
 def portraits_photoshoot(photoshoot):
     page = Pages.query.filter_by(page_name=photoshoot).first_or_404()
     photo = PageImages.query.filter_by(page_id=page.id).all()
-    list = []
-    get_photo(photo, list)
-    return render_template('portraits/photoshoot.html', page=page, photo=list, enumerate=enumerate)
+    photo_list = []
+    get_photo(photo, photo_list)
+    return render_template('photoshoots/photoshoot.html', page=page, photo=photo_list, enumerate=enumerate)
 
 @main.route('/wedding/')
 def wedding():

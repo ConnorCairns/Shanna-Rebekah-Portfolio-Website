@@ -10,11 +10,16 @@ client = boto3.Session(
 s3 = client.resource('s3')
 
 def s3_upload(name):
-    name = name.lower()
-    path = f"app/static/temp/{name}.JPG"
-    image = open(path, 'rb')
-    s3.Bucket('shanna-rebekah-photography').put_object(Key=f'{name}.JPG', ContentType='image/png',Body=image)
-
+        name = name.lower()
+        path = f"app/static/temp/{name}.JPG"
+        image = open(path, 'rb')
+        try:
+            s3.Bucket('shanna-rebekah-photography').put_object(Key=f'{name}.JPG', ContentType='image/png',Body=image)
+        except botocore.exceptions.ClientError as e:
+            if e.response['Error']['Code'] == "404":
+                return redirect(url_for('errors/error_404.html'))
+            else:
+                return redirect(url_for('errors/error_500.html'))
 
 def save_pic(picture, name):
     name = name.lower()

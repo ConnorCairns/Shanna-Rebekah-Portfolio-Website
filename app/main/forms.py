@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, TextAreaField, SelectField
 from wtforms.validators import DataRequired, length, Email, ValidationError
-from flask_wtf.file import FileField, FileAllowed
+from flask_wtf.file import FileField, FileAllowed, FileRequired
 from app.models import Pages, PageImages
 
 class contact_form(FlaskForm):
@@ -26,7 +26,7 @@ class New_photoshoot(FlaskForm):
 class Add_Photoshoot_Photo(FlaskForm):
     name = StringField("Image Name", validators=[DataRequired()])
     page = StringField("Page Name", validators=[DataRequired()])
-    picture = FileField('Upload Photo', validators=[FileAllowed(['jpg', 'png'])])
+    picture = FileField('Upload Photo', validators=[FileAllowed(['jpg', 'png']), FileRequired()])
     submit = SubmitField("Add photo")
 
     def validate_name(self, name):
@@ -34,7 +34,7 @@ class Add_Photoshoot_Photo(FlaskForm):
         if name:
             raise ValidationError('A photo already exists with that name')
 
-   # def validate_page(self, page):
-   #     page = Pages.query.filter_by(page_name=(page.data).lower()).first()
-   #     if page is None:
-   #         raise ValidationError('No page exists with that name')
+    def validate_page(self, page):
+        page = Pages.query.filter_by(page_name=(page.data).lower()).first()
+        if page is None:
+            raise ValidationError('No page exists with that name')
