@@ -5,7 +5,7 @@
             <h1 class="display-5">{{ page.page_name.title() }}</h1>
             <hr class="mt-1 mb-3">
             <p class="font-weight-normal text-justify">{{ page.page_text }}</p>
-            <a class="btn btn-md btn-outline-secondary float-right mb-2" href="{{ url_for('main.portraits') }}">Go Back</a>
+            <a class="btn btn-md btn-outline-secondary float-right mb-2" href="{{ url_for('main.category', page=page.page_category) }}">Go Back</a>
         </div>
     </div>
     <div id="spinnerdiv" class="row spinner mb-4" style="position:relative;"></div>
@@ -14,12 +14,16 @@
         <div class="w-100"></div>
         {% endif %}
         <div class="col-md mb-4">
-            <img onload="spinner()" id="test" src="https://s3.eu-west-2.amazonaws.com/shanna-rebekah-photography/{{ img }}.JPG" alt="Account Picture" class="img-fluid rounded">
+            <img id="img" src="https://s3.eu-west-2.amazonaws.com/shanna-rebekah-photography/{{ img }}.JPG" alt="Account Picture" class="img-fluid rounded">
         </div>
         {%endfor%}
     </div>
 
 <script>
+    var img = document.getElementById('img');
+    if(img.complete){
+        spinner()
+    }
     function spinner() {
         $('#spinnerdiv').removeClass('spinner mb-4');
     };

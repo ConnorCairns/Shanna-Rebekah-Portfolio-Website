@@ -2,7 +2,7 @@
 <div class="container-fluid">
     {% for page in pages %}
     <div class="row text-center regular-width align-items-center mb-4">
-        {% if page.id % 2 == 0 %}
+        {% if (pages.index(page)) % 2 == 0 %}
         <div class="col-md-6">
             {% else %}
             <div class="col-md-6 order-lg-last">
