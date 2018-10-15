@@ -53,4 +53,7 @@ def s3_delete():
             if os.path.isfile(file_path):
                 os.unlink(file_path)
         except Exception as e:
-            print(e)
+            if e.response['Error']['Code'] == "404":
+                return redirect(url_for('errors/error_404.html'))
+            else:
+                return redirect(url_for('errors/error_500.html'))

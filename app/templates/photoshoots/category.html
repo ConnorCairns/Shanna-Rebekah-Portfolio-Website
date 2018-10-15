@@ -7,7 +7,7 @@
             {% else %}
             <div class="col-md-6 order-lg-last">
                 {% endif %}
-                <h1 class="display-5">{{ page.page_name }}</h1>
+                <h1 class="display-5">{{ page.page_name.title() }}</h1>
                 <hr class="mt-1 mb-4">
                 <p class="font-weight-normal text-justify">{{ page.page_text }}</p>
                 <a class="btn btn-md btn-outline-secondary float-right mb-2" href="{{ url_for('main.portraits_photoshoot', photoshoot=page.page_name)}}">View more</a>
