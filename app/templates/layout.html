@@ -22,6 +22,11 @@
 
 <body>
   <div class="container-fluid">
+    <noscript>
+      <div class="alert alert-danger">
+        Please enable javascript for this website to have full functionality.
+      </div>
+      </noscript>
     {% include 'includes/navbar.html' %}
       {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}

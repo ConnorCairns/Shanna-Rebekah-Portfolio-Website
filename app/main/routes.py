@@ -39,7 +39,6 @@ def new_photoshoot():
 def new_picture():
     form = Add_Photoshoot_Photo()
     if form.validate_on_submit():
-        print(form.picture.data)
         page = Pages.query.filter_by(page_name=str(form.page.data).lower()).first()
         photo = PageImages(photo_name=(form.name.data).lower(), page=page)
         db.session.add(photo)
