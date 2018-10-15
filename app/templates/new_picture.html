@@ -1,4 +1,8 @@
-{% extends 'layout.html' %} {% block body %}
+{% extends 'layout.html' %} 
+{% block head %}
+    <title>New Photoshoot Photo</title>
+{% endblock %}
+{% block body %}
 <div class="container">
     <form method="POST" action="" enctype="multipart/form-data">
         {{ form.hidden_tag() }}

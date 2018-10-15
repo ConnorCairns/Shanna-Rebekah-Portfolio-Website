@@ -1,4 +1,9 @@
-{% extends 'layout.html' %} {% block body %}
+{% extends 'layout.html' %}
+{% block head %}
+    <title>{{ page.title() }}</title>
+    <meta name="Description" content="See all my {{ page }} photography, including the photoshoots: {% for page in pages %}{{ page.page_name.title() }}, {% endfor %}">
+{% endblock %}
+{% block body %}
 <div class="container-fluid">
     {% for page in pages %}
     <div class="row text-center regular-width align-items-center mb-4">
