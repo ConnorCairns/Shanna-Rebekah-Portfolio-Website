@@ -15,6 +15,7 @@
                 Photoshoot</a>
             <a class="btn btn-md btn-outline-secondary float-lg-right mr-2 hide" href="{{ url_for('main.new_picture') }}">Add
                 Photoshoot Photo</a>
+            <a class="btn btn-md btn-outline-secondary float-lg-right mr-2 hide" href="{{ url_for('users.admin') }}">Admin Page</a>
             {% endif %}
             <h2 id="jstest">{{ current_user.username }}</h2>
             <p class="text-secondary">{{ current_user.email }}</p>

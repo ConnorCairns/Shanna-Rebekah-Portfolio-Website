@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+{% block head %}
+    <title>Admin Page</title>
+    <meta name="Description" content="Admin page for Shanna Rebekah Photography">
+{% endblock %}
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div id="Dashboard" class="btn btn-md btn-outline-secondary"></div>
+            <div id="Users" class="btn btn-md btn-outline-secondary"></div>
+            <div id="Photos" class="btn btn-md btn-outline-secondary"></div>
+        </div>
+    </div>
+
+
+<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script src="{{ url_for('static',filename='js/test.js') }}" type="text/babel"></script>
+{% endblock %}

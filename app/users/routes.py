@@ -133,3 +133,8 @@ def edit():
         form.email.data = current_user.email
     image = url_for('static', filename='profile pictures/' + current_user.profile_picture)
     return render_template('account/edit.html', title='Edit Account', image=image, form=form)
+
+@users.route('/account/admin')
+@login_required
+def admin():
+    return render_template('account/admin.html')
