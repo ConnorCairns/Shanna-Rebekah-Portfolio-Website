@@ -74,23 +74,3 @@ def portraits_photoshoot(photoshoot):
     photo_list = []
     get_photo(photo, photo_list)
     return render_template('photoshoots/photoshoot.html', page=page, photo=photo_list, enumerate=enumerate)
-
-@main.route('/wedding/')
-def wedding():
-    return render_template('coming_soon.html')
-
-@main.route('/still life/')
-def still_life():
-    return render_template('coming_soon.html')
-
-@main.route('/family/')
-def family():
-    return render_template('coming_soon.html')
-
-@main.route('/fashion/')
-def fashion():
-    return render_template('coming_soon.html')
-
-@main.route('/something/')
-def something():
-    return render_template('coming_soon.html')

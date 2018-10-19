@@ -1,0 +1,20 @@
+{
+  "name": "Shanna-Rebekah-Portfolio-Website",
+  "version": "1.0.0",
+  "description": "Top quality A* A-level coursework",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ConnorCairns/Shanna-Rebekah-Portfolio-Website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ConnorCairns/Shanna-Rebekah-Portfolio-Website/issues"
+  },
+  "homepage": "https://github.com/ConnorCairns/Shanna-Rebekah-Portfolio-Website#readme"
+}
