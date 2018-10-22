@@ -77,21 +77,56 @@ class Dashboard extends React.Component {
         }
     }
 
-    render() {
-        const getCategory = () => {
+    makeTable() {
+        return (
+            <table className="table">
+                <thead className="bg-secondary">
+                    {this.tableHead()}
+                </thead>
+                {this.tableBody()}
+            </table>
+        )
+    }
+
+    dashboard() {
+        return (
+            <div>
+                <p>haha yes</p>
+            </div>
+        )
+    }
+
+    test() {
+        if (this.state.show === "users" || this.state.show === "photos") {
             return (
-                <table className="table">
-                    <thead className="bg-secondary">
-                        {this.tableHead()}
-                    </thead>
-                    {this.tableBody()}
-                </table>
+                this.makeTable()
             )
-        };
-        return (<div>
-            <Button handleclick={this.handleButton} />
-            {getCategory()}
-        </div >)
+        } else if (this.state.show === "dashboard") {
+            return (
+                this.dashboard()
+            )
+        }
+    }
+
+    render() {
+        return (
+            <div>
+                <div className="row text-center align-items-center mb-3">
+                    <div className="col-12">
+                        <h1>Haha yes</h1>
+                        <hr className="mt-1 mb-4 bg-secondary"></hr>
+                        <p className="font-weight-normal text-justify text-center">Admin things</p>
+                        <Button handleclick={this.handleButton} />
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-12">
+                        {this.test()}
+                    </div>
+                </div>
+            </div>
+
+        )
     };
     handleButton = (event) => {
         let id = event.target.id
