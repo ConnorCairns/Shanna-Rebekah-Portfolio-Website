@@ -3,7 +3,12 @@
     <title>Admin Page</title>
     <meta name="Description" content="Admin page for Shanna Rebekah Photography">
     <script>
-        window.REACT_APP_USER_DATA = {{ users }}
+        window.users = {{ usernames|tojson }}
+        window.emails = {{ emails|tojson }}
+        window.last_login = {{ last_logins|tojson }}
+        window.photo_name = {{ photo_name|tojson }}
+        window.photo_category = {{ photo_category|tojson }}
+        window.clients = {{ clients|tojson }}
     </script>
 {% endblock %}
 {% block body %}

@@ -23,13 +23,59 @@ class Dashboard extends React.Component {
     }
     render() {
         const getCategory = () => {
+            let zip = (array1, array2) => array1.map((x, i) => [x, array2[i]]);
+            let new_users = zip(users, emails);
+            let new_photos = zip(photo_name, photo_category);
             if (this.state.show === "users") {
-                return window.REACT_APP_USER_DATA 
-            }
+                return (
+                    <table className="table">
+                        <thead className="bg-secondary">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Last Login</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {new_users.map((user, i) => (
+                                <tr>
+                                <th style={{width:'2%'}} scope="row">{i+1}</th>
+                                <td>{user[0]}</td>
+                                <td>{user[1]}</td>
+                                <td>{last_login[i]}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                )
+            }else if (this.state.show === "photos") {
+                return (
+                    <table className="table">
+                        <thead className="bg-secondary">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Photo Name</th>
+                                <th scope="col">Photo Category</th>
+                                <th scope="col">Client</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {new_photos.map((photo, i) => (
+                                <tr>
+                                <th style={{width:'2%'}} scope="row">{i+1}</th>
+                                <td>{photo[0]}</td>
+                                <td>{photo[1]}</td>
+                                <td>{clients[i]}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                )
+            };
         };
-        return (<div className="teststes">
+        return (<div>
             <Button handleclick = {this.handleButton} />
-            {this.state.show}
             {getCategory()}
         </div>)
     };
@@ -42,13 +88,3 @@ class Dashboard extends React.Component {
 
 const domContainer = document.querySelector('#reactroot');
 ReactDOM.render(<Dashboard />, domContainer);
-
-
-
-//this.state = { clicked: false };
-//return <a onClick= {() => this.setState({ clicked: true })}>haha yes</a>    
-
-
-//if (this.state.clicked) {
-//      return 'You liked this.';
-//    }
