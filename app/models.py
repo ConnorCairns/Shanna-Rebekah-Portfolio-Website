@@ -3,6 +3,7 @@ from flask_login import UserMixin, current_user
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask import current_app, abort
 from functools import wraps
+import datetime
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -15,6 +16,7 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(60), nullable=False)
     profile_picture = db.Column(db.String(20), nullable=False, default='default.jpg')
     role = db.Column(db.String(10), nullable=False, default='Client')
+    last_login = db.Column(db.String(20))
     photos = db.relationship('Photos', backref='client', lazy=True)
 
     def reset_token(self, expire=1800):
@@ -42,17 +44,8 @@ class User(db.Model, UserMixin):
             return role_checker
         return must_be_role_decorator
 
-    @property
-    def serialize(self):
-        return {
-            'id' : self.id,
-            'username': self.username,
-            'role': self.role,
-            'photos': self.photos
-        }
-
     def __repr__(self):
-        return f"User('{self.username}','{self.email}','{self.profile_picture}')"
+        return f"User('{self.username}','{self.email}','{self.last_login}','{self.role}')"
 
 
 
