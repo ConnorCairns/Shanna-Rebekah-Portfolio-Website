@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, url_for, flash, redirect, request
+from flask import Blueprint, render_template, url_for, flash, redirect, request, jsonify
 from flask_login import login_user, current_user, logout_user, login_required
 from app import db, bcrypt
 from app.models import User, Photos, Todo_table
@@ -137,4 +137,6 @@ def edit():
 @users.route('/account/admin')
 @login_required
 def admin():
-    return render_template('account/admin.html')
+    users = User.query.filter_by(role="Client").all()
+    print(users)
+    return render_template('account/admin.html', users=jsonify(i.serialize for i in users))

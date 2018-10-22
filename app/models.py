@@ -42,6 +42,15 @@ class User(db.Model, UserMixin):
             return role_checker
         return must_be_role_decorator
 
+    @property
+    def serialize(self):
+        return {
+            'id' : self.id,
+            'username': self.username,
+            'role': self.role,
+            'photos': self.photos
+        }
+
     def __repr__(self):
         return f"User('{self.username}','{self.email}','{self.profile_picture}')"
 
