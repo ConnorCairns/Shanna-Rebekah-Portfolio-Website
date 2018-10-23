@@ -16,10 +16,29 @@ class Button extends React.Component {
     }
 };
 
+class DropDown extends React.Component {
+    constructor(props) {
+        super(props);
+
+    }
+    render() {
+        return (
+            <div className="dropdown">
+                <button className="btn btn-secondary dropdown-toggle float-right mb-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Order by</button>
+                <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a className="dropdown-item" onClick={this.props.handleclick} id="alphabetical">Alphabetical</a>
+                    <a className="dropdown-item" onClick={this.props.handleclick} id="last_login">Last Login</a>
+                    <a className="dropdown-item" onClick={this.props.handleclick} id="id">ID</a>
+                </div>
+            </div>
+        )
+    }
+}
+
 class Dashboard extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { show: "dashboard" }
+        this.state = { show: "dashboard", dropdown: "id" }
     }
 
     tableHead() {
@@ -99,7 +118,10 @@ class Dashboard extends React.Component {
     test() {
         if (this.state.show === "users" || this.state.show === "photos") {
             return (
-                this.makeTable()
+                <div className="col-12">
+                    <DropDown handleclick={this.handleDropdown} />
+                    {this.makeTable()}
+                </div>
             )
         } else if (this.state.show === "dashboard") {
             return (
@@ -120,9 +142,7 @@ class Dashboard extends React.Component {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-12">
-                        {this.test()}
-                    </div>
+                    {this.test()}
                 </div>
             </div>
 
@@ -132,6 +152,10 @@ class Dashboard extends React.Component {
         let id = event.target.id
         this.setState({ show: id })
     };
+    handleDropdown = (event) => {
+        let id = event.target.id
+        this.setState({ dropdown: id })
+    }
 
 }
 

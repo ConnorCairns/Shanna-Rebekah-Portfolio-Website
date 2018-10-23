@@ -36,3 +36,14 @@ def get_todo(todos_object, todos, ids):
         temp = todo.id
         ids.append(temp)
     return todos, ids
+
+def get_admin_page(usernames, emails, last_logins, photo_name, photo_category, clients, users, photos):
+    for user in users:
+        usernames.append(user.username)
+        emails.append(user.email)
+        last_logins.append(user.last_login)
+    for photo in photos:
+        photo_name.append(photo.photo_name)
+        photo_category.append(photo.photo_category)
+        clients.append(photo.client.email)
+    return usernames, emails, last_logins, photo_name, photo_category, clients

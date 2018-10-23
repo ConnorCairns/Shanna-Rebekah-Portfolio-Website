@@ -3,7 +3,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 from app import db, bcrypt
 from app.models import User, Photos, Todo_table
 from app.users.forms import Registration, Login, Edit, email_reset_pass, reset_pass, search, todo as TodoForm #This has to be imported like this otherwise it doesnt work and i have no idea why
-from app.users.utils import update_profile_picture, send_reset_email, get_photo, get_todo
+from app.users.utils import update_profile_picture, send_reset_email, get_photo, get_todo, get_admin_page
 from wtforms.validators import ValidationError
 from sqlalchemy import and_, or_
 import datetime
@@ -147,16 +147,9 @@ def admin():
     usernames = []
     emails = []
     last_logins = []
-    for user in users:
-        usernames.append(user.username)
-        emails.append(user.email)
-        last_logins.append(user.last_login)
     photos = Photos.query.all()
     photo_name = []
     photo_category = []
     clients = []
-    for photo in photos:
-        photo_name.append(photo.photo_name)
-        photo_category.append(photo.photo_category)
-        clients.append(photo.client.email)
+    get_admin_page(usernames, emails, last_logins, photo_name, photo_category, clients, users, photos)
     return render_template('account/admin.html', usernames=usernames, emails=emails, last_logins=last_logins, photo_name=photo_name, photo_category=photo_category, clients=clients)
