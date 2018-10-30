@@ -32,5 +32,4 @@ def start(config_class=config):
     app.register_blueprint(main)
     app.register_blueprint(errors)
 
-
     return app
