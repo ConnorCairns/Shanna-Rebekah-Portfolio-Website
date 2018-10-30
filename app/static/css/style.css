@@ -108,6 +108,12 @@ p {
     .small-width {
         width: 100%;
     }
+    
+    .caption h1 {
+        color: white;
+        font-size: 2.8rem;
+    }
+
 }
 
 
