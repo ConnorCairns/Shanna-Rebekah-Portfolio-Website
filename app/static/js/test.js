@@ -88,9 +88,9 @@ class Dashboard extends React.Component {
                 </tr>
             )
         }
-    }
+1}
 
-    getUsersArray() {
+    getArray() {
         let zip = (array1, array2) => array1.map((x, i) => [x, array2[i]]);
         let zip_users = zip(users, emails);
         let zip_photos = zip(photo_name, photo_category);
@@ -118,7 +118,7 @@ class Dashboard extends React.Component {
     }
 
     tableBody() {
-        let array = this.getUsersArray()
+        let array = this.getArray()
         if (this.state.show === "users") {
             return (
                 <tbody>
