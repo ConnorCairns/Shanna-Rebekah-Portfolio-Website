@@ -12,7 +12,6 @@ class Add_Photo(FlaskForm):
     submit = SubmitField("Add photo")
             
     def validate_client(self, client):
-        print(client)
         test = User.query.filter_by(email=(client.data).lower()).first()
         if test is None:
             raise ValidationError('There is no client with that email')

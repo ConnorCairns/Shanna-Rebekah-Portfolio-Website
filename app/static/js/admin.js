@@ -88,7 +88,7 @@ class Dashboard extends React.Component {
                 </tr>
             )
         }
-1}
+    }
 
     getArray() {
         let zip = (array1, array2) => array1.map((x, i) => [x, array2[i]]);
