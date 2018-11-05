@@ -14,9 +14,8 @@
 {% block body %}
 <div id="reactroot" class="container-fluid"></div> 
 
-
-<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+<script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
 <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-<script src="{{ url_for('static',filename='js/test.js') }}" type="text/babel"></script>
+<script src="{{ url_for('static',filename='prodjs/test.js') }}" type="text/babel"></script>
 {% endblock %}
