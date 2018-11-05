@@ -198,7 +198,6 @@ var Dashboard = function (_React$Component3) {
                     )
                 );
             }
-            1;
         }
     }, {
         key: "getArray",
