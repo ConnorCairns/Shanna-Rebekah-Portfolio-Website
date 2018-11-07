@@ -1,9 +1,11 @@
 import os
 import secrets
+import datetime
 from PIL import Image
 from flask import url_for
 from flask_mail import Message
 from app import mail
+from app import db
 from flask import current_app, render_template
 
 def update_profile_picture(picture):
@@ -47,3 +49,10 @@ def get_admin_page(usernames, emails, last_logins, photo_name, photo_category, c
         photo_category.append(photo.photo_category)
         clients.append(photo.client.email)
     return usernames, emails, last_logins, photo_name, photo_category, clients
+
+def last_login(current_user):
+        date = str(datetime.datetime.now())
+        d = datetime.datetime.strptime(date, '%Y-%m-%d %H:%M:%S.%f')
+        new_date = d.strftime('%d-%m-%Y %I:%M %p')
+        current_user.last_login=new_date
+        db.session.commit()
