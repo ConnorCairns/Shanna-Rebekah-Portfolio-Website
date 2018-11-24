@@ -1,24 +1,28 @@
 {% extends 'layout.html' %}
 {% block head %}
-    <title>Contact</title>
-    <meta name="Description" content="Contact me at shannarebekahphotography@gmail.com for all enquiries or more information.">
+<title>Contact</title>
+<meta name="Description" content="Contact me at shannarebekahphotography@gmail.com for all enquiries or more information.">
 {% endblock %}
 {% block body %}
-<div class="container-fluid">  
+<div class="container-fluid">
     <div class="row small-width">
         <div class="col-sm text-center">
             <h1 class="display-4">Contact</h1>
             <hr class=my-2>
-            <p class="font-weight-normal text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam porta convallis arcu quis aliquam. Proin lacus magna,
-                laoreet in elit rutrum, aliquet dignissim ligula. Vivamus at neque mollis, lacinia nunc nec, porttitor neque. Quisque
-                luctus eros et fermentum malesuada. In eu maximus erat. Aliquam in egestas neque. Mauris vel massa velit. Etiam ultrices
-                vel risus et posuere. Suspendisse eu suscipit enim. In hac habitasse platea dictumst. Mauris ac orci lacus. Curabitur
-                a venenatis purus. Maecenas lacinia lectus ut mattis ultricies. Sed nibh libero, condimentum vel massa finibus, gravida
-                imperdiet urna. Aenean non risus pharetra erat tincidunt accumsan. Integer faucibus odio ut mollis egestas. Vestibulum
-                aliquam eros id metus aliquam dignissim. Aliquam enim tortor, malesuada in suscipit at, pellentesque a sem. Vivamus
-                vitae consequat purus. Curabitur lacinia id ex non vehicula. Curabitur pulvinar orci et magna auctor pharetra. Sed
-                congue risus quis lacinia ornare. Quisque ac sem non sapien hendrerit ornare dictum eget justo. Aenean interdum tortor
-                sed imperdiet dignissim. Aliquam condimentum lacus ac lorem eleifend, eu lobortis velit egestas.</p>
+            <div class="list-group pt-1">
+                <div class="list-group-item list-group-item-action flex-column">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">Email</h5>
+                    </div>
+                    <p class="mb-1">shannarebekahphotography@gmail.com</p>
+                </div>
+                <div class="list-group-item list-group-item-action flex-column">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">Phone</h5>
+                    </div>
+                    <p class="mb-1">07873723310</p>
+                </div>
+            </div>
         </div>
         <div class="col-sm">
             <form method="POST" action="">
@@ -29,66 +33,66 @@
                     <div class="form-group">
                         {{ form.fname.label(class="form-control-label") }}
                         {% if form.fname.errors %}
-                            {{ form.fname(class="form-control form-control-lg is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for error in form.fname.errors %}
-                                    <span>{{ error }}</span>
-                                {% endfor %}
-                            </div>
+                        {{ form.fname(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.fname.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
                         {% else %}
-                            {{ form.fname(class="form-control form-control-lg") }}
+                        {{ form.fname(class="form-control form-control-lg") }}
                         {% endif %}
                     </div>
                     <div class="form-group">
                         {{ form.sname.label(class="form-control-label") }}
                         {% if form.sname.errors %}
-                            {{ form.sname(class="form-control form-control-lg is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for error in form.sname.errors %}
-                                    <span>{{ error }}</span>
-                                {% endfor %}
-                            </div>
+                        {{ form.sname(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.sname.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
                         {% else %}
-                            {{ form.sname(class="form-control form-control-lg") }}
+                        {{ form.sname(class="form-control form-control-lg") }}
                         {% endif %}
                     </div>
                     <div class="form-group">
                         {{ form.email.label(class="form-control-label") }}
                         {% if form.email.errors %}
-                            {{ form.email(class="form-control form-control-lg is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for error in form.email.errors %}
-                                    <span>{{ error }}</span>
-                                {% endfor %}
-                            </div>
+                        {{ form.email(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
                         {% else %}
-                            {{ form.email(class="form-control form-control-lg") }}
+                        {{ form.email(class="form-control form-control-lg") }}
                         {% endif %}
                     </div>
                     <div class="form-group">
                         {{ form.title.label(class="form-control-label") }}
                         {% if form.title.errors %}
-                            {{ form.title(class="form-control form-control-lg is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for error in form.title.errors %}
-                                    <span>{{ error }}</span>
-                                {% endfor %}
-                            </div>
+                        {{ form.title(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.title.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
                         {% else %}
-                            {{ form.title(class="form-control form-control-lg") }}
+                        {{ form.title(class="form-control form-control-lg") }}
                         {% endif %}
                     </div>
                     <div class="form-group">
                         {{ form.body.label(class="form-control-label") }}
                         {% if form.body.errors %}
-                            {{ form.body(class="form-control form-control-lg is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for error in form.body.errors %}
-                                    <span>{{ error }}</span>
-                                {% endfor %}
-                            </div>
+                        {{ form.body(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.body.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
                         {% else %}
-                            {{ form.body(class="form-control form-control-lg") }}
+                        {{ form.body(class="form-control form-control-lg") }}
                         {% endif %}
                     </div>
                 </fieldset>
@@ -99,4 +103,4 @@
         </div>
     </div>
 
-{% endblock %}
+    {% endblock %}
