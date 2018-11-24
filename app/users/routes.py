@@ -3,10 +3,9 @@ from flask_login import login_user, current_user, logout_user, login_required
 from app import db, bcrypt
 from app.models import User, Photos, Todo_table
 from app.users.forms import Registration, Login, Edit, email_reset_pass, reset_pass, search, todo as TodoForm #This has to be imported like this otherwise it doesnt work and i have no idea why
-from app.users.utils import update_profile_picture, send_reset_email, get_photo, get_todo, get_admin_page
+from app.users.utils import update_profile_picture, send_reset_email, get_photo, get_todo, get_admin_page, last_login
 from wtforms.validators import ValidationError
 from sqlalchemy import and_, or_
-import datetime
 
 users = Blueprint('users', __name__)
 
@@ -34,11 +33,7 @@ def login():
         user = User.query.filter_by(email=form.email.data.lower()).first_or_404()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
-            date = str(datetime.datetime.now())
-            d = datetime.datetime.strptime(date, '%Y-%m-%d %H:%M:%S.%f')
-            new_date = d.strftime('%d-%m-%Y %I:%M %p')
-            current_user.last_login=new_date
-            db.session.commit()
+            last_login(current_user)
             next_page = request.args.get('next')
             return redirect(next_page) if next_page else redirect(url_for('users.account'))
         else:

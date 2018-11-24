@@ -5,14 +5,15 @@ from app import db
 from app.models import PageImages, Pages, User
 from app.main.forms import Add_Photoshoot_Photo, New_photoshoot
 from app.pictures.utils import s3_upload, save_pic, del_pic
-from app.users.utils import get_photo
-from flask_login import login_required
-
+from app.users.utils import get_photo, last_login
+from flask_login import login_required, current_user
 
 main = Blueprint('main', __name__)
 
 @main.route('/')
 def index():
+    if current_user.is_authenticated:
+        last_login(current_user)
     return render_template('index.html')
 
 
