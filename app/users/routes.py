@@ -137,6 +137,7 @@ def edit():
 
 @users.route('/account/admin')
 @login_required
+@User.must_be_role("Admin")
 def admin():
     users = User.query.all()
     usernames = []
