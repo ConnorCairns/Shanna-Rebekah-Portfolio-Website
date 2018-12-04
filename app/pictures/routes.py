@@ -15,7 +15,7 @@ def new_photo():
     form = Add_Photo()
     if form.validate_on_submit():
         client = User.query.filter_by(email=form.client.data).first()
-        photo = Photos(photo_name=form.name.data, photo_category=form.category.data, client=client)
+        photo = Photos(photo_name=(form.name.data).lower(), photo_category=form.category.data, client=client)
         db.session.add(photo)
         db.session.commit()
         save_pic(form.picture.data, form.name.data)
