@@ -9,11 +9,11 @@ class Registration(FlaskForm):
     username = StringField("Username", validators=[DataRequired(),length(min=2, max=20)])
     email = StringField("Email", validators=[DataRequired(),Email()])
     password = PasswordField("Password", validators=[DataRequired()])
-    password_confirm = PasswordField("Confirm Password", validators=[DataRequired(),EqualTo("password")])
+    password_confirm = PasswordField("Confirm Password", validators=[DataRequired(),EqualTo("password", "Passwords do not match")])
     submit = SubmitField("Sign Up")
 
     def validate_username(self, username):
-        user = User.query.filter_by(username=username.data).first()
+        user = User.query.filter_by(username=username.data.lower()).first()
         if user:
             raise ValidationError('Username taken')
     
@@ -42,7 +42,7 @@ class Edit(FlaskForm):
     
     def validate_email(self, email):
         if email.data != current_user.email:
-            email = User.query.filter_by(email=email.data).first()
+            email = User.query.filter_by(email=email.data.lower()).first()
             if email:
                 raise ValidationError('Email already has an account created')
 

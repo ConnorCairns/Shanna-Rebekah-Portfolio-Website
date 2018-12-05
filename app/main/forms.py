@@ -14,7 +14,7 @@ class contact_form(FlaskForm):
 
 class New_photoshoot(FlaskForm):
     name = StringField("Photoshoot Name", validators=[DataRequired(), length(min=2, max=20)])
-    category = SelectField("Photoshoot Category", choices=[('portraits','Portraits'),('wedding','Wedding'),('still life','Still Life'),('the beauty of the struggles of society','The Beauty of the Struggles of Society'),('fashion','Fashion'),('something','Something')])
+    category = SelectField("Photoshoot Category", choices=[('portraits','Portraits'),('wedding','Wedding'),('still life','Still Life'),('the beauty of the struggles of society','The Beauty of the Struggles of Society'),('fashion','Fashion'),('food','Food')])
     text = TextAreaField("Photoshoot Description", validators=[DataRequired()])
     submit = SubmitField("Add Photoshoot")
 
