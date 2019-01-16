@@ -95,16 +95,14 @@
                         {{ form.body(class="form-control form-control-lg") }}
                         {% endif %}
                     </div>
-                    <div>
+                    <div class="form-group submit-div">
+                        {{ form.recaptcha }}
                         {% for error in form.recaptcha.errors %}
-                            <span>{{ error }}</span>
+                            {{ error }}
                         {% endfor %}
+                        {{ form.submit(class="btn btn-lg btn-outline-secondary float-right submit-button") }}
                     </div>
-                <div class="form-group submit-div">
-                    {{ form.recaptcha }}
-                    {{ form.submit(class="btn btn-lg btn-outline-secondary float-right submit-button") }}
-                </div>
-            </fieldset>
+                </fieldset>
             </form>
         </div>
     </div>
