@@ -1,4 +1,4 @@
-from flask_wtf import FlaskForm
+from flask_wtf import FlaskForm, RecaptchaField, Recaptcha
 from wtforms import StringField, SubmitField, TextAreaField, SelectField
 from wtforms.validators import DataRequired, length, Email, ValidationError
 from flask_wtf.file import FileField, FileAllowed, FileRequired
@@ -11,6 +11,7 @@ class contact_form(FlaskForm):
     title = StringField("Message Title", validators=[DataRequired(), length(min=2, max=50)])
     body = TextAreaField("Message", validators=[DataRequired(), length(min=2, max=2500)])
     submit = SubmitField("Submit")
+    recaptcha = RecaptchaField(validators=[Recaptcha(message="Please prove you are human")])
 
 class New_photoshoot(FlaskForm):
     name = StringField("Photoshoot Name", validators=[DataRequired(), length(min=2, max=20)])

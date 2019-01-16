@@ -96,6 +96,16 @@ p {
     margin: 0 !important;
 }
 
+.submit-div {
+    display: flex;
+    align-items: center;
+}
+
+.submit-button {
+    margin-left: auto;
+    height: fit-content;
+}
+
 @media (max-width: 767.98px) {
     .hide {
         display: none;
