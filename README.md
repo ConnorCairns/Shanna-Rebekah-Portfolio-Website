@@ -1,6 +1,6 @@
 # Shanna Rebekah Portfolio Website
 
-Top quality A* A-level coursework
+A-level computer science coursework, photography website created with Flask, Bootstrap 4 and React.
 
 ## How to run
 Requires python 3.6 or above
@@ -10,7 +10,7 @@ Requires python 3.6 or above
 python3 -m venv venv
 . venv/bin/activate
 pip install -r requirements.txt
-python db.py
+python db.py 
 python run.py
 ```
 
@@ -35,6 +35,9 @@ export email_username="email"
 export email_pass="password"
 export shanna_db="sqlite:///name.db"
 export shanna_secret_key="secret key"
+export shanna_aws_access="S3 public key"
+export shanna_aws_secret="S3 private key"
+
 ```
 
 #### Windows
